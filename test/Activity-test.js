@@ -3,9 +3,9 @@ import Activity from '../src/Activity';
 import UserRepository from '../src/UserRepository';
 import User from '../src/User';
 
-describe('Activity', function() {
-  let activity;
-  let user;
+describe.only('Activity', function() {
+  let activity1, activity2;
+  let user1, user2;
   let userRepository;
   beforeEach(() => {
     user1 = new User({
@@ -56,10 +56,10 @@ describe('Activity', function() {
     expect(Activity).to.be.a('function');
   });
   it('should be an instance of activity', function() {
-    expect(activity1).to.be.an.instanceof(Activity);
+    expect(activity1).to.be.an.instanceOf(Activity);
   });
   it('should hold a userId', function() {
-    expect(activity2.userId).to.equal(2);
+    expect(activity2.userID).to.equal(2);
   });
   it('should hold a date', function() {
     expect(activity1.date).to.equal("2019/06/15");
