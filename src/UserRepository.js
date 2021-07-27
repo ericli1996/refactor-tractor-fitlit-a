@@ -83,22 +83,22 @@ class UserRepository {
       return user.calculateAverageQualityThisWeek(date) > 3;
     })
   }
-  getLongestSleepers(date) {
-    return sleepData.filter(sleep => {
-      return sleep.date === date;
-    }).sort((a, b) => {
-      return b.hoursSlept - a.hoursSlept;
-    })[0].userID;
-  }
-  getWorstSleepers(date) {
-    let testing = sleepData.filter(sleep => {
-      return sleep.date === date;
-    }).sort((a, b) => {
-      return a.hoursSlept - b.hoursSlept;
-    })[0].userID;
-    console.log(testing);
-    return testing;
-  }
+  // getLongestSleepers(date) {
+  //   return sleepData.filter(sleep => {
+  //     return sleep.date === date;
+  //   }).sort((a, b) => {
+  //     return b.hoursSlept - a.hoursSlept;
+  //   })[0].userID;
+  // }
+  // getWorstSleepers(date) {
+  //   let testing = sleepData.filter(sleep => {
+  //     return sleep.date === date;
+  //   }).sort((a, b) => {
+  //     return a.hoursSlept - b.hoursSlept;
+  //   })[0].userID;
+  //   console.log(testing);
+  //   return testing;
+  // }
 }
 
 export default UserRepository;
