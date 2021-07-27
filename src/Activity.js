@@ -11,10 +11,9 @@ class Activity {
   }
 
   doActivity(userRepo) {
-    var activity = this;
     userRepo.users.find(user => {
-      return user.id === activity.userID;
-    }).updateActivities(activity);
+      return user.id === this.userID;
+    }).updateActivities(this);
   }
 
   calculateMiles(userRepository) {
