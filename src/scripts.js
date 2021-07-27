@@ -220,7 +220,7 @@ sleepFriendWorstSleeper.innerText = userRepository.users.find(user => {
 sleepInfoHoursAverageAlltime.innerText = user.hoursSleptAverage;
 
 stepsInfoMilesWalkedToday.innerText = user.activityRecord.find(activity => {
-  return (activity.date === todayDate && activity.userId === user.id)
+  return (activity.date === todayDate && activity.userID === user.id)
 }).calculateMiles(userRepository);
 
 sleepInfoQualityAverageAlltime.innerText = user.sleepQualityAverage;
