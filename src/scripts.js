@@ -15,6 +15,7 @@ import Sleep from './Sleep';
 
 
 let userRepository = new UserRepository();
+userRepository.sleepData = sleepData;
 
 userData.forEach(user => {
   user = new User(user);
@@ -209,13 +210,13 @@ sleepCalendarHoursAverageWeekly.innerText = user.calculateAverageHoursThisWeek(t
 
 sleepCalendarQualityAverageWeekly.innerText = user.calculateAverageQualityThisWeek(todayDate);
 
-// sleepFriendLongestSleeper.innerText = userRepository.users.find(user => {
-//   return user.id === userRepository.getLongestSleepers(todayDate)
-// }).getFirstName();
+sleepFriendLongestSleeper.innerText = userRepository.users.find(user => {
+  return user.id === userRepository.getLongestSleepers(todayDate)
+}).getFirstName();
 
-// sleepFriendWorstSleeper.innerText = userRepository.users.find(user => {
-//   return user.id === userRepository.getWorstSleepers(todayDate)
-// }).getFirstName();
+sleepFriendWorstSleeper.innerText = userRepository.users.find(user => {
+  return user.id === userRepository.getWorstSleepers(todayDate)
+}).getFirstName();
 
 sleepInfoHoursAverageAlltime.innerText = user.hoursSleptAverage;
 
