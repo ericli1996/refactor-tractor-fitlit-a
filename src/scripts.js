@@ -1,6 +1,6 @@
 import './css/base.scss';
 import './css/styles.scss';
-
+import { fetchAPIData } from './api-Calls';
 import userData from './data/users';
 import activityData from './data/activity';
 import sleepData from './data/sleep';
@@ -12,15 +12,39 @@ import Activity from './Activity';
 import Hydration from './Hydration';
 import Sleep from './Sleep';
 
+const generateUser = () => {
+  fetchAPIData('users')
+    .then(data => {
+      user = new User(data.userData[Math.floor(Math.random() * data.userData.length)])
+      users = data.userData.map(user => new User(user))
+
+    // .then(data => console.log("DATA <>>>", data))
+    // .then(data => users = new User(data.userData))
+    // .then(data => userRepository = new)
+  })
+  .then(data => console.log(users))
+}
+
+window.addEventListener('load', function() {
+  generateUser();
+  // setUpUserRepo();
+  // generateHydration();
+  // setUpHydrationRepo();
+  // generateSleep();
+  // setUpSleepRepo();
+})
 
 
+// let userRepository = new UserRepository();
+let user;
+let users;
 let userRepository = new UserRepository();
 userRepository.sleepData = sleepData;
 
-userData.forEach(user => {
-  user = new User(user);
-  userRepository.users.push(user)
-});
+// userData.forEach(user => {
+//   user = new User(user);
+//   userRepository.users.push(user)
+// });
 
 activityData.forEach(activity => {
   activity = new Activity(activity, userRepository);
@@ -34,7 +58,7 @@ sleepData.forEach(sleep => {
   sleep = new Sleep(sleep, userRepository);
 });
 
-let user = userRepository.users[0];
+user = userRepository.users[0];
 let todayDate = "2019/09/22";
 user.findFriendsNames(userRepository.users);
 
