@@ -6,6 +6,7 @@ class Sleep {
     this.sleepQuality = data.sleepQuality;
     this.sleep(userRepository);
   }
+
   sleep(userRepo) {
     userRepo.users.find(user => {
       return user.id === this.userID;
