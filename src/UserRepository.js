@@ -1,8 +1,9 @@
-import sleepData from './data/sleep';
+// import sleepData from './data/sleep';
 
 class UserRepository {
   constructor() {
     this.users = [];
+    this.sleepData = [];
   }
   getUser(id) {
     return this.users.find(function(user) {
@@ -82,20 +83,35 @@ class UserRepository {
       return user.calculateAverageQualityThisWeek(date) > 3;
     })
   }
+  // getLongestSleepers(date) {
+  //   return sleepData.filter(sleep => {
+  //     return sleep.date === date;
+  //   }).sort((a, b) => {
+  //     return b.hoursSlept - a.hoursSlept;
+  //   })[0].userID;
+  // }
   getLongestSleepers(date) {
-    return sleepData.filter(sleep => {
+    return this.sleepData.filter(sleep => {
       return sleep.date === date;
     }).sort((a, b) => {
       return b.hoursSlept - a.hoursSlept;
     })[0].userID;
   }
   getWorstSleepers(date) {
-    return sleepData.filter(sleep => {
+    return this.sleepData.filter(sleep => {
       return sleep.date === date;
     }).sort((a, b) => {
       return a.hoursSlept - b.hoursSlept;
     })[0].userID;
   }
+  // getWorstSleepers(date) {
+  //   let testing = sleepData.filter(sleep => {
+  //     return sleep.date === date;
+  //   }).sort((a, b) => {
+  //     return a.hoursSlept - b.hoursSlept;
+  //   })[0].userID;
+  //   return testing;
+  // }
 }
 
 export default UserRepository;

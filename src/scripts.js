@@ -15,6 +15,7 @@ import Sleep from './Sleep';
 
 
 let userRepository = new UserRepository();
+userRepository.sleepData = sleepData;
 
 userData.forEach(user => {
   user = new User(user);
