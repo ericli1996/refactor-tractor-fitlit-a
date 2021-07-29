@@ -74,7 +74,7 @@ let trendingStairsPhraseContainer = document.querySelector('.trending-stairs-phr
 let userInfoDropdown = document.querySelector('#user-info-dropdown');
 
 window.addEventListener('load', function() {
-  generateUser();
+  // generateUser();
   setUpUserRepo();
   // generateHydration();
   // setUpHydrationRepo();
@@ -82,42 +82,59 @@ window.addEventListener('load', function() {
   // setUpSleepData();
 })
 
-const generateUser = () => {
-  fetchAPIData('users')
-    .then(data => {
-      user = new User(data.userData[Math.floor(Math.random() * data.userData.length)])
-  })
-  // .then(data => users = data.userData)
-  // .then(data => console.log(users))
-  .then(data => renderUser(user))
-}
+// const generateUser = () => {
+//   fetchAPIData('users')
+//     .then(data => {
+//       user = new User(data.userData[Math.floor(Math.random() * data.userData.length)])
+//   })
+//   .then(data => renderUser(user))
+// }
 
-const renderUser = (user) => {
-  dropdownGoal.innerText = `DAILY STEP GOAL | ${user.dailyStepGoal}`;
-  dropdownEmail.innerText = `EMAIL | ${user.email}`;
-  dropdownName.innerText = user.name.toUpperCase();
-  headerName.innerText = `${user.getFirstName()}'S `;
-}
 
 const setUpUserRepo = () => {
   fetchAPIData('users')
-    // .then(data => users = data.userData)
-    // .then(data => userRepository.users = users)
-    .then(data => userRepository.users = data.userData.map(userObj => new User(userObj, userRepository)))
-    // .then(data => console.log(userRepository))
-    .then(data => setUpSleepData(userRepository))
+  // .then(data => users = data.userData)
+  // .then(data => userRepository.users = users)
+  .then(data => userRepository.users = data.userData.map(userObj => new User(userObj, userRepository)))
+  // .then(data => console.log(userRepository))
+  .then(data => setUpSleepData(userRepository))
+  .then(data => generateHydration(userRepository))
+  .then(data => generateActivity(userRepository))
 }
 
 const setUpSleepData = (userRepository) => {
-  fetchAPIData("sleep")
+  fetchAPIData('sleep')
   // .then(data => console.log("SLEEP <>>>", data.sleepData))
-    .then(data => userRepository.sleepData = data.sleepData.map(sleepObj => new Sleep(sleepObj, userRepository)))
-    // .then(data => sleep = new Sleep(data.sleepData[user.id - 1], userRepo))
-    // .then(data => sleepData = data.sleepData)
-    .then(data => console.log(userRepository))
-
+  .then(data => userRepository.sleepData = data.sleepData.map(sleepObj => new Sleep(sleepObj, userRepository)))
+  // .then(data => sleep = new Sleep(data.sleepData[user.id - 1], userRepo))
+  // .then(data => sleepData = data.sleepData)
+  // .then(data => console.log(userRepository))
+  .then(data => renderUser(userRepository))
 }
 
+// const renderSleepData = (userRepository) => {
+// }
+
+const generateHydration = (userRepo) => {
+  fetchAPIData('hydration')
+  .then(data => data.hydrationData.map(hydroObj => new Hydration(hydroObj, userRepo)))
+  // .then(data => console.log(userRepository))
+}
+
+const generateActivity = (userRepo) => {
+  fetchAPIData('activity')
+  .then(data => data.activityData.map(activityObj => new Activity(activityObj, userRepo)))
+  .then(data => console.log(userRepository))
+}
+  
+const renderUser = (userRepo) => {
+  let randomUser = userRepo.users[Math.floor(Math.random() * userRepo.users.length)];
+  dropdownGoal.innerText = `DAILY STEP GOAL | ${randomUser.dailyStepGoal}`;
+  dropdownEmail.innerText = `EMAIL | ${randomUser.email}`;
+  dropdownName.innerText = randomUser.name.toUpperCase();
+  headerName.innerText = `${randomUser.getFirstName()}'S `;
+  updateTrendingStepDays(randomUser);
+}
 
 //
 // userRepository.sleepData = sleepData;
@@ -148,18 +165,18 @@ const setUpSleepData = (userRepository) => {
 //
 //
 // mainPage.addEventListener('click', showInfo);
-// profileButton.addEventListener('click', showDropdown);
+profileButton.addEventListener('click', showDropdown);
 // stairsTrendingButton.addEventListener('click', updateTrendingStairsDays());
-// stepsTrendingButton.addEventListener('click', updateTrendingStepDays());
+stepsTrendingButton.addEventListener('click', updateTrendingStepDays);
 //
 // function flipCard(cardToHide, cardToShow) {
 //   cardToHide.classList.add('hide');
 //   cardToShow.classList.remove('hide');
 // }
 //
-// function showDropdown() {
-//   userInfoDropdown.classList.toggle('hide');
-// }
+function showDropdown() {
+  userInfoDropdown.classList.toggle('hide');
+}
 //
 // function showInfo() {
 //   if (event.target.classList.contains('steps-info-button')) {
@@ -223,10 +240,12 @@ const setUpSleepData = (userRepository) => {
 //   trendingStairsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStairsDays[0]}</p>`;
 // }
 //
-// function updateTrendingStepDays() {
-//   user.findTrendingStepDays();
-//   trendingStepsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStepDays[0]}</p>`;
-// }
+function updateTrendingStepDays(randomUser) {
+  randomUser.findTrendingStepDays();
+  console.log(randomUser);
+  trendingStepsPhraseContainer.innerHTML = `<p class='trend-line'>${randomUser.trendingStepDays[0]}</p>`;
+}
+
 // let sortedHydrationDataByDate = user.ouncesRecord.sort((a, b) => {
 //   if (Object.keys(a)[0] > Object.keys(b)[0]) {
 //     return -1;
@@ -308,10 +327,10 @@ const setUpSleepData = (userRepository) => {
 //
 // stepsCalendarTotalStepsWeekly.innerText = user.calculateAverageStepsThisWeek(todayDate);
 //
-// stepsTrendingButton.addEventListener('click', function () {
-//   user.findTrendingStepDays();
-//   trendingStepsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStepDays[0]}</p>`;
-// });
+stepsTrendingButton.addEventListener('click', function () {
+  user.findTrendingStepDays();
+  trendingStepsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStepDays[0]}</p>`;
+});
 //
 // stepsFriendActiveMinutesAverageToday.innerText = userRepository.calculateAverageMinutesActive(todayDate);
 //
