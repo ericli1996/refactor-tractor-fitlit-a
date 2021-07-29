@@ -1,10 +1,6 @@
 import './css/base.scss';
 import './css/styles.scss';
 import { fetchAPIData } from './api-Calls';
-import userData from './data/users';
-import activityData from './data/activity';
-// import sleepData from './data/sleep';
-import hydrationData from './data/hydration';
 
 import UserRepository from './UserRepository';
 import User from './User';
