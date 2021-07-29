@@ -74,7 +74,6 @@ let trendingStairsPhraseContainer = document.querySelector('.trending-stairs-phr
 let userInfoDropdown = document.querySelector('#user-info-dropdown');
 
 window.addEventListener('load', function() {
-  // generateUser();
   setUpUserRepo();
   // generateHydration();
   // setUpHydrationRepo();
@@ -82,60 +81,44 @@ window.addEventListener('load', function() {
   // setUpSleepData();
 })
 
-// const generateUser = () => {
-//   fetchAPIData('users')
-//     .then(data => {
-//       user = new User(data.userData[Math.floor(Math.random() * data.userData.length)])
-//   })
-//   .then(data => renderUser(user))
-// }
-
-
 const setUpUserRepo = () => {
   fetchAPIData('users')
-  // .then(data => users = data.userData)
-  // .then(data => userRepository.users = users)
   .then(data => userRepository.users = data.userData.map(userObj => new User(userObj, userRepository)))
-  // .then(data => console.log(userRepository))
   .then(data => setUpSleepData(userRepository))
   .then(data => generateHydration(userRepository))
   .then(data => generateActivity(userRepository))
+  // .then(data => renderUser(userRepository))
 }
 
 const setUpSleepData = (userRepository) => {
   fetchAPIData('sleep')
-  // .then(data => console.log("SLEEP <>>>", data.sleepData))
   .then(data => userRepository.sleepData = data.sleepData.map(sleepObj => new Sleep(sleepObj, userRepository)))
-  // .then(data => sleep = new Sleep(data.sleepData[user.id - 1], userRepo))
-  // .then(data => sleepData = data.sleepData)
-  // .then(data => console.log(userRepository))
-  .then(data => renderUser(userRepository))
 }
-
-// const renderSleepData = (userRepository) => {
-// }
 
 const generateHydration = (userRepo) => {
   fetchAPIData('hydration')
   .then(data => data.hydrationData.map(hydroObj => new Hydration(hydroObj, userRepo)))
-  // .then(data => console.log(userRepository))
 }
 
 const generateActivity = (userRepo) => {
   fetchAPIData('activity')
   .then(data => data.activityData.map(activityObj => new Activity(activityObj, userRepo)))
-  .then(data => console.log(userRepository))
+  .then(data => renderUser(userRepository))
 }
-  
+
 const renderUser = (userRepo) => {
   let randomUser = userRepo.users[Math.floor(Math.random() * userRepo.users.length)];
   dropdownGoal.innerText = `DAILY STEP GOAL | ${randomUser.dailyStepGoal}`;
   dropdownEmail.innerText = `EMAIL | ${randomUser.email}`;
   dropdownName.innerText = randomUser.name.toUpperCase();
   headerName.innerText = `${randomUser.getFirstName()}'S `;
+  // console.log('randomUser', randomUser);
+  // console.log('randomUser activity record', randomUser.activityRecord);
+  stepsUserStepsToday.innerText = `${randomUser.activityRecord[0].steps}`
   updateTrendingStepDays(randomUser);
 }
 
+console.log('global userRepo',  userRepository);
 //
 // userRepository.sleepData = sleepData;
 //
@@ -164,77 +147,77 @@ const renderUser = (userRepo) => {
 // user.findFriendsNames(userRepository.users);
 //
 //
-// mainPage.addEventListener('click', showInfo);
+mainPage.addEventListener('click', showInfo);
 profileButton.addEventListener('click', showDropdown);
 // stairsTrendingButton.addEventListener('click', updateTrendingStairsDays());
 stepsTrendingButton.addEventListener('click', updateTrendingStepDays);
 //
-// function flipCard(cardToHide, cardToShow) {
-//   cardToHide.classList.add('hide');
-//   cardToShow.classList.remove('hide');
-// }
+function flipCard(cardToHide, cardToShow) {
+  cardToHide.classList.add('hide');
+  cardToShow.classList.remove('hide');
+}
 //
 function showDropdown() {
   userInfoDropdown.classList.toggle('hide');
 }
 //
-// function showInfo() {
-//   if (event.target.classList.contains('steps-info-button')) {
-//     flipCard(stepsMainCard, stepsInfoCard);
-//   }
-//   if (event.target.classList.contains('steps-friends-button')) {
-//     flipCard(stepsMainCard, stepsFriendsCard);
-//   }
-//   if (event.target.classList.contains('steps-trending-button')) {
-//     flipCard(stepsMainCard, stepsTrendingCard);
-//   }
-//   if (event.target.classList.contains('steps-calendar-button')) {
-//     flipCard(stepsMainCard, stepsCalendarCard);
-//   }
-//   if (event.target.classList.contains('hydration-info-button')) {
-//     flipCard(hydrationMainCard, hydrationInfoCard);
-//   }
-//   if (event.target.classList.contains('hydration-friends-button')) {
-//     flipCard(hydrationMainCard, hydrationFriendsCard);
-//   }
-//   if (event.target.classList.contains('hydration-calendar-button')) {
-//     flipCard(hydrationMainCard, hydrationCalendarCard);
-//   }
-//   if (event.target.classList.contains('stairs-info-button')) {
-//     flipCard(stairsMainCard, stairsInfoCard);
-//   }
-//   if (event.target.classList.contains('stairs-friends-button')) {
-//     flipCard(stairsMainCard, stairsFriendsCard);
-//   }
-//   if (event.target.classList.contains('stairs-trending-button')) {
-//     flipCard(stairsMainCard, stairsTrendingCard);
-//   }
-//   if (event.target.classList.contains('stairs-calendar-button')) {
-//     flipCard(stairsMainCard, stairsCalendarCard);
-//   }
-//   if (event.target.classList.contains('sleep-info-button')) {
-//     flipCard(sleepMainCard, sleepInfoCard);
-//   }
-//   if (event.target.classList.contains('sleep-friends-button')) {
-//     flipCard(sleepMainCard, sleepFriendsCard);
-//   }
-//   if (event.target.classList.contains('sleep-calendar-button')) {
-//     flipCard(sleepMainCard, sleepCalendarCard);
-//   }
-//   if (event.target.classList.contains('steps-go-back-button')) {
-//     flipCard(event.target.parentNode, stepsMainCard);
-//   }
-//   if (event.target.classList.contains('hydration-go-back-button')) {
-//     flipCard(event.target.parentNode, hydrationMainCard);
-//   }
-//   if (event.target.classList.contains('stairs-go-back-button')) {
-//     flipCard(event.target.parentNode, stairsMainCard);
-//   }
-//   if (event.target.classList.contains('sleep-go-back-button')) {
-//     flipCard(event.target.parentNode, sleepMainCard);
-//   }
-// }
-//
+function showInfo() {
+  if (event.target.classList.contains('steps-info-button')) {
+    flipCard(stepsMainCard, stepsInfoCard);
+  }
+  if (event.target.classList.contains('steps-friends-button')) {
+    flipCard(stepsMainCard, stepsFriendsCard);
+  }
+  if (event.target.classList.contains('steps-trending-button')) {
+    flipCard(stepsMainCard, stepsTrendingCard);
+  }
+  if (event.target.classList.contains('steps-calendar-button')) {
+    flipCard(stepsMainCard, stepsCalendarCard);
+  }
+  if (event.target.classList.contains('hydration-info-button')) {
+    flipCard(hydrationMainCard, hydrationInfoCard);
+  }
+  if (event.target.classList.contains('hydration-friends-button')) {
+    flipCard(hydrationMainCard, hydrationFriendsCard);
+  }
+  if (event.target.classList.contains('hydration-calendar-button')) {
+    flipCard(hydrationMainCard, hydrationCalendarCard);
+  }
+  if (event.target.classList.contains('stairs-info-button')) {
+    flipCard(stairsMainCard, stairsInfoCard);
+  }
+  if (event.target.classList.contains('stairs-friends-button')) {
+    flipCard(stairsMainCard, stairsFriendsCard);
+  }
+  if (event.target.classList.contains('stairs-trending-button')) {
+    flipCard(stairsMainCard, stairsTrendingCard);
+  }
+  if (event.target.classList.contains('stairs-calendar-button')) {
+    flipCard(stairsMainCard, stairsCalendarCard);
+  }
+  if (event.target.classList.contains('sleep-info-button')) {
+    flipCard(sleepMainCard, sleepInfoCard);
+  }
+  if (event.target.classList.contains('sleep-friends-button')) {
+    flipCard(sleepMainCard, sleepFriendsCard);
+  }
+  if (event.target.classList.contains('sleep-calendar-button')) {
+    flipCard(sleepMainCard, sleepCalendarCard);
+  }
+  if (event.target.classList.contains('steps-go-back-button')) {
+    flipCard(event.target.parentNode, stepsMainCard);
+  }
+  if (event.target.classList.contains('hydration-go-back-button')) {
+    flipCard(event.target.parentNode, hydrationMainCard);
+  }
+  if (event.target.classList.contains('stairs-go-back-button')) {
+    flipCard(event.target.parentNode, stairsMainCard);
+  }
+  if (event.target.classList.contains('sleep-go-back-button')) {
+    flipCard(event.target.parentNode, sleepMainCard);
+  }
+}
+
 // function updateTrendingStairsDays() {
 //   user.findTrendingStairsDays();
 //   trendingStairsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStairsDays[0]}</p>`;
@@ -245,6 +228,11 @@ function updateTrendingStepDays(randomUser) {
   console.log(randomUser);
   trendingStepsPhraseContainer.innerHTML = `<p class='trend-line'>${randomUser.trendingStepDays[0]}</p>`;
 }
+
+// stepsTrendingButton.addEventListener('click', function () {
+//   user.findTrendingStepDays();
+//   trendingStepsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStepDays[0]}</p>`;
+// });
 
 // let sortedHydrationDataByDate = user.ouncesRecord.sort((a, b) => {
 //   if (Object.keys(a)[0] > Object.keys(b)[0]) {
@@ -327,10 +315,19 @@ function updateTrendingStepDays(randomUser) {
 //
 // stepsCalendarTotalStepsWeekly.innerText = user.calculateAverageStepsThisWeek(todayDate);
 //
-stepsTrendingButton.addEventListener('click', function () {
-  user.findTrendingStepDays();
-  trendingStepsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStepDays[0]}</p>`;
-});
+
+
+
+
+// stepsTrendingButton.addEventListener('click', function () {
+//   user.findTrendingStepDays();
+//   trendingStepsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStepDays[0]}</p>`;
+// });
+
+
+
+
+
 //
 // stepsFriendActiveMinutesAverageToday.innerText = userRepository.calculateAverageMinutesActive(todayDate);
 //
