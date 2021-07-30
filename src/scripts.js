@@ -170,7 +170,6 @@ const updateFriendsWeeklySteps = (user, userRepo) => {
 
 const sortHydrationDataByDate = (user) => {
   const result = user.ouncesRecord.sort((a, b) => {
-    // console.log(user.ouncesRecord);
   if (Object.keys(a)[0] > Object.keys(b)[0]) {
     return -1;
   }
@@ -202,17 +201,6 @@ const renderDailyUserGlasses = (user, userRepo) => {
 const renderAllUserDailyOz = (userRepo) => {
   hydrationFriendOuncesToday.innerText = userRepo.calculateAverageDailyWater(todayDate);
 }
-
-// hydrationUserOuncesToday.innerText = hydrationData.find(hydration => {
-//   return hydration.userID === user.id && hydration.date === todayDate;
-// }).numOunces;
-
-// hydrationFriendOuncesToday.innerText = userRepository.calculateAverageDailyWater(todayDate);
-
-// hydrationInfoGlassesToday.innerText = hydrationData.find(hydration => {
-//   return hydration.userID === user.id && hydration.date === todayDate;
-// }).numOunces / 8;
-
 
 // user.findFriendsTotalStepsForWeek(userRepository.users, todayDate);
 
