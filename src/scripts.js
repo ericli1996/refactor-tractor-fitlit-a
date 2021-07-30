@@ -141,7 +141,8 @@ const renderUserStairActivity = (user, userRepo) => {
   stairsCalendarStairsAverageWeekly.innerText = (user.calculateAverageFlightsThisWeek(todayDate) * 12).toFixed(0);
   stairsFriendFlightsAverageToday.innerText = userRepo.calculateAverageStairs(todayDate);
   updateTrendingStairsDays(user);
-  console.log("userREPO <>>>>", userRepo)
+  updateFriendsWeeklySteps(user, userRepo);
+  console.log("userREPO <>>>>", userRepo);
 }
 
 const updateTrendingStairsDays = (user) => {
@@ -154,12 +155,17 @@ const updateTrendingStepDays = (user) => {
   trendingStepsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStepDays[0]}</p>`;
 }
 
-//
-//
+const updateFriendsWeeklySteps = (user, userRepo) => {
+  user.findFriendsTotalStepsForWeek(userRepo.users, todayDate)
+  user.friendsActivityRecords.forEach(friend => {
+    dropdownFriendsStepsContainer.innerHTML += `
+    <p class='dropdown-p friends-steps'>${friend.firstName} |  ${friend.totalWeeklySteps}</p>
+    `;
+  })
+}
 
-//
+// user.findFriendsTotalStepsForWeek(userRepository.users, todayDate);
 
-//
 // stairsInfoFlightsToday.innerText = activityData.find(activity => {
 //   return activity.userID === user.id && activity.date === todayDate;
 // }).flightsOfStairs;
@@ -170,11 +176,7 @@ const updateTrendingStepDays = (user) => {
 //
 // stairsCalendarStairsAverageWeekly.innerText = (user.calculateAverageFlightsThisWeek(todayDate) * 12).toFixed(0);
 // user.findFriendsNames(userRepository.users);
-//
-//
 
-// stairsTRENDING STAIRSButton.addEventListener('click', updateTrendingStairsDays());
-// stepsTrendingButton.addEventListener('click', updateTrendingStepDays);
 //
 function flipCard(cardToHide, cardToShow) {
   cardToHide.classList.add('hide');
@@ -331,13 +333,9 @@ function showInfo() {
 //   return activity.userID === user.id && activity.date === todayDate;
 // }).numSteps;
 //
-// user.findFriendsTotalStepsForWeek(userRepository.users, todayDate);
+
 //
-// user.friendsActivityRecords.forEach(friend => {
-//   dropdownFriendsStepsContainer.innerHTML += `
-//   <p class='dropdown-p friends-steps'>${friend.firstName} |  ${friend.totalWeeklySteps}</p>
-//   `;
-// });
+
 //
 // let friendsStepsParagraphs = document.querySelectorAll('.friends-steps');
 //
