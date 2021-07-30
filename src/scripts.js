@@ -210,11 +210,11 @@ const renderUserSleepToday = (user) => {
 const renderUserAvgSleep = (user) => {
   sleepInfoHoursAverageAlltime.innerText = user.hoursSleptAverage;
   sleepInfoQualityAverageAlltime.innerText = user.sleepQualityAverage;
+  sleepCalendarHoursAverageWeekly.innerText = user.calculateAverageHoursThisWeek(todayDate);
+  sleepCalendarQualityAverageWeekly.innerText = user.calculateAverageQualityThisWeek(todayDate);
 }
 
-// sleepCalendarHoursAverageWeekly.innerText = user.calculateAverageHoursThisWeek(todayDate);
-//
-// sleepCalendarQualityAverageWeekly.innerText = user.calculateAverageQualityThisWeek(todayDate);
+
 //
 // sleepFriendLongestSleeper.innerText = userRepository.users.find(user => {
 //   return user.id === userRepository.getLongestSleepers(todayDate)
