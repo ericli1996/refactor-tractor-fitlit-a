@@ -143,7 +143,7 @@ const renderUserStairActivity = (user, userRepo) => {
   stairsFriendFlightsAverageToday.innerText = userRepo.calculateAverageStairs(todayDate);
   updateTrendingStairsDays(user);
   updateFriendsWeeklySteps(user, userRepo);
-  console.log("userREPO <>>>>", userRepo);
+  renderUserSleepHoursToday(user);
 }
 
 const updateTrendingStairsDays = (user) => {
@@ -166,7 +166,6 @@ const updateFriendsWeeklySteps = (user, userRepo) => {
     renderDailyUserOz(user, userRepo);
   })
 }
-
 
 const sortHydrationDataByDate = (user) => {
   const result = user.ouncesRecord.sort((a, b) => {
@@ -202,20 +201,42 @@ const renderAllUserDailyOz = (userRepo) => {
   hydrationFriendOuncesToday.innerText = userRepo.calculateAverageDailyWater(todayDate);
 }
 
-// user.findFriendsTotalStepsForWeek(userRepository.users, todayDate);
+const renderUserSleepHoursToday = (user) => {
+  sleepUserHoursToday.innerText = user.sleepHoursRecord.find(sleep => sleep.date === todayDate).hours;
+}
 
-// stairsInfoFlightsToday.innerText = activityData.find(activity => {
-//   return activity.userID === user.id && activity.date === todayDate;
-// }).flightsOfStairs;
-//
-//
-//
-// stairsCalendarFlightsAverageWeekly.innerText = user.calculateAverageFlightsThisWeek(todayDate);
-//
-// stairsCalendarStairsAverageWeekly.innerText = (user.calculateAverageFlightsThisWeek(todayDate) * 12).toFixed(0);
-// user.findFriendsNames(userRepository.users);
+// sleepUserHoursToday.innerText = sleepData.find(sleep => {
+//     return sleep.userID === user.id && sleep.date === todayDate;
+//   }).hoursSlept;
 
+
+
+// sleepCalendarHoursAverageWeekly.innerText = user.calculateAverageHoursThisWeek(todayDate);
 //
+// sleepCalendarQualityAverageWeekly.innerText = user.calculateAverageQualityThisWeek(todayDate);
+//
+// sleepFriendLongestSleeper.innerText = userRepository.users.find(user => {
+//   return user.id === userRepository.getLongestSleepers(todayDate)
+// }).getFirstName();
+//
+// sleepFriendWorstSleeper.innerText = userRepository.users.find(user => {
+//   return user.id === userRepository.getWorstSleepers(todayDate)
+// }).getFirstName();
+//
+// sleepInfoHoursAverageAlltime.innerText = user.hoursSleptAverage;
+//
+// sleepInfoQualityAverageAlltime.innerText = user.sleepQualityAverage;
+//
+// sleepInfoQualityToday.innerText = sleepData.find(sleep => {
+  //   return sleep.userID === user.id && sleep.date === todayDate;
+  // }).sleepQuality;
+  //
+
+
+
+
+
+
 function flipCard(cardToHide, cardToShow) {
   cardToHide.classList.add('hide');
   cardToShow.classList.remove('hide');
@@ -283,48 +304,7 @@ function showInfo() {
 }
 
 
-// sleepCalendarHoursAverageWeekly.innerText = user.calculateAverageHoursThisWeek(todayDate);
-//
-// sleepCalendarQualityAverageWeekly.innerText = user.calculateAverageQualityThisWeek(todayDate);
-//
-// sleepFriendLongestSleeper.innerText = userRepository.users.find(user => {
-//   return user.id === userRepository.getLongestSleepers(todayDate)
-// }).getFirstName();
-//
-// sleepFriendWorstSleeper.innerText = userRepository.users.find(user => {
-//   return user.id === userRepository.getWorstSleepers(todayDate)
-// }).getFirstName();
-//
-// sleepInfoHoursAverageAlltime.innerText = user.hoursSleptAverage;
-//
-// sleepInfoQualityAverageAlltime.innerText = user.sleepQualityAverage;
-//
-// sleepInfoQualityToday.innerText = sleepData.find(sleep => {
-  //   return sleep.userID === user.id && sleep.date === todayDate;
-  // }).sleepQuality;
-  //
-  // sleepUserHoursToday.innerText = sleepData.find(sleep => {
-    //   return sleep.userID === user.id && sleep.date === todayDate;
-    // }).hoursSlept;
 
-
-//
-
-//
-// stairsTrendingButton.addEventListener('click', function () {
-//   user.findTrendingStairsDays();
-//   trendingStairsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStairsDays[0]}</p>`;
-// });
-//
-
-
-
-
-
-// stepsTrendingButton.addEventListener('click', function () {
-//   user.findTrendingStepDays();
-//
-// });
 
 
 
@@ -346,9 +326,6 @@ function showInfo() {
 // }).numSteps;
 //
 
-//
-
-//
 // let friendsStepsParagraphs = document.querySelectorAll('.friends-steps');
 //
 // friendsStepsParagraphs.forEach(paragraph => {
