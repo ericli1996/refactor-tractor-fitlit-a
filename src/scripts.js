@@ -133,25 +133,26 @@ const renderFriendStepActivity = (userRepo) => {
 }
 
 const renderUserStairActivity = (user, userRepo) => {
-  stairsUserStairsToday.innerText = user.activityRecord.find(activity => activity.date === todayDate).flightsOfStairs;
+  stairsUserStairsToday.innerText = user.activityRecord.find(activity => activity.date === todayDate).flightsOfStairs * 12;
+  stairsInfoFlightsToday.innerText = user.activityRecord.find(activity => activity.date === todayDate).flightsOfStairs;
 }
 
 
-stairsCalendarFlightsAverageWeekly.innerText = user.calculateAverageFlightsThisWeek(todayDate);
-
-stairsCalendarStairsAverageWeekly.innerText = (user.calculateAverageFlightsThisWeek(todayDate) * 12).toFixed(0);
-
-stairsFriendFlightsAverageToday.innerText = (userRepository.calculateAverageStairs(todayDate) / 12).toFixed(1);
-
-stairsInfoFlightsToday.innerText = activityData.find(activity => {
-  return activity.userID === user.id && activity.date === todayDate;
-}).flightsOfStairs;
-
-
-
-stairsCalendarFlightsAverageWeekly.innerText = user.calculateAverageFlightsThisWeek(todayDate);
-
-stairsCalendarStairsAverageWeekly.innerText = (user.calculateAverageFlightsThisWeek(todayDate) * 12).toFixed(0);
+// stairsCalendarFlightsAverageWeekly.innerText = user.calculateAverageFlightsThisWeek(todayDate);
+//
+// stairsCalendarStairsAverageWeekly.innerText = (user.calculateAverageFlightsThisWeek(todayDate) * 12).toFixed(0);
+//
+// stairsFriendFlightsAverageToday.innerText = (userRepository.calculateAverageStairs(todayDate) / 12).toFixed(1);
+//
+// stairsInfoFlightsToday.innerText = activityData.find(activity => {
+//   return activity.userID === user.id && activity.date === todayDate;
+// }).flightsOfStairs;
+//
+//
+//
+// stairsCalendarFlightsAverageWeekly.innerText = user.calculateAverageFlightsThisWeek(todayDate);
+//
+// stairsCalendarStairsAverageWeekly.innerText = (user.calculateAverageFlightsThisWeek(todayDate) * 12).toFixed(0);
 // user.findFriendsNames(userRepository.users);
 //
 //
