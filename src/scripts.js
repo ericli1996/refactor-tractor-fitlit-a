@@ -204,8 +204,13 @@ const renderAllUserDailyOz = (userRepo) => {
 const renderUserSleepToday = (user) => {
   sleepUserHoursToday.innerText = user.sleepHoursRecord.find(sleep => sleep.date === todayDate).hours;
   sleepInfoQualityToday.innerText = user.sleepQualityRecord.find(sleep => sleep.date === todayDate).quality;
+  renderUserAvgSleep(user);
 }
 
+const renderUserAvgSleep = (user) => {
+  sleepInfoHoursAverageAlltime.innerText = user.hoursSleptAverage;
+  sleepInfoQualityAverageAlltime.innerText = user.sleepQualityAverage;
+}
 
 // sleepCalendarHoursAverageWeekly.innerText = user.calculateAverageHoursThisWeek(todayDate);
 //
@@ -219,9 +224,7 @@ const renderUserSleepToday = (user) => {
 //   return user.id === userRepository.getWorstSleepers(todayDate)
 // }).getFirstName();
 //
-// sleepInfoHoursAverageAlltime.innerText = user.hoursSleptAverage;
 //
-// sleepInfoQualityAverageAlltime.innerText = user.sleepQualityAverage;
 
   //
 
