@@ -128,34 +128,6 @@ const renderFriendStepActivity = (userRepo) => {
   stepsFriendAverageStepGoal.innerText = userRepo.calculateAverageStepGoal();
   stepsFriendStepsAverageToday.innerText = userRepo.calculateAverageSteps(todayDate);
 }
-//
-//
-//
-
-
-//
-// userRepository.sleepData = sleepData;
-//
-// console.log(userRepository)
-// console.log(user, users);
-//
-// // userData.forEach(user => {
-// //   user = new User(user);
-// //   userRepository.users.push(user)
-// // });
-//
-// activityData.forEach(activity => {
-//   activity = new Activity(activity, userRepository);
-// });
-//
-// hydrationData.forEach(hydration => {
-//   hydration = new Hydration(hydration, userRepository);
-// });
-//
-// sleepData.forEach(sleep => {
-//   sleep = new Sleep(sleep, userRepository);
-// });
-//
 
 // user.findFriendsNames(userRepository.users);
 //
@@ -169,11 +141,11 @@ function flipCard(cardToHide, cardToShow) {
   cardToHide.classList.add('hide');
   cardToShow.classList.remove('hide');
 }
-//
+
 function showDropdown() {
   userInfoDropdown.classList.toggle('hide');
 }
-//
+
 function showInfo() {
   if (event.target.classList.contains('steps-info-button')) {
     flipCard(stepsMainCard, stepsInfoCard);
