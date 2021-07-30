@@ -109,14 +109,11 @@ const renderUser = (userRepo) => {
   dropdownEmail.innerText = `EMAIL | ${randomUser.email}`;
   dropdownName.innerText = randomUser.name.toUpperCase();
   headerName.innerText = `${randomUser.getFirstName()}'S `;
-  // console.log('randomUser', randomUser);
-  // console.log('randomUser activity record', randomUser.activityRecord);
-
-  // updateTrendingStepDays(randomUser);
-  renderUserActivity(randomUser, userRepo)
+  renderUserStepsActivity(randomUser, userRepo);
+  renderFriendStepActivity(userRepo);
 }
 
-const renderUserActivity = (user, userRepo) => {
+const renderUserStepsActivity = (user, userRepo) => {
   stepsInfoActiveMinutesToday.innerText = user.activityRecord.find(activity => activity.date === todayDate).minutesActive;
   stepsUserStepsToday.innerText = user.activityRecord[0].steps;
   stepsInfoMilesWalkedToday.innerText = user.activityRecord[0].calculateMiles(userRepo);
@@ -126,11 +123,13 @@ const renderUserActivity = (user, userRepo) => {
   stepsCalendarTotalStepsWeekly.innerText = user.calculateAverageStepsThisWeek(todayDate);
 }
 
-// stepsFriendActiveMinutesAverageToday.innerText = userRepository.calculateAverageMinutesActive(todayDate);
+const renderFriendStepActivity = (userRepo) => {
+  stepsFriendActiveMinutesAverageToday.innerText = userRepo.calculateAverageMinutesActive(todayDate);
+  stepsFriendAverageStepGoal.innerText = userRepo.calculateAverageStepGoal();
+  stepsFriendStepsAverageToday.innerText = userRepo.calculateAverageSteps(todayDate);
+}
 //
-// stepsFriendAverageStepGoal.innerText = `${userRepository.calculateAverageStepGoal()}`;
 //
-// stepsFriendStepsAverageToday.innerText = userRepository.calculateAverageSteps(todayDate);
 //
 
 
