@@ -191,13 +191,12 @@ const renderUserWeeklyOz = (user) => {
 
 const renderDailyUserOz = (user, userRepo) => {
   hydrationUserOuncesToday.innerText = userRepo.hydrationData.filter(hydro => hydro.userId === user.id).find(hydro => hydro.date === todayDate).ounces;
-  // console.log('hydro', hydro);
+  renderDailyUserGlasses(user, userRepo);
 }
 
-// const renderDailyUserGlasses = (user, userRepo) => {
-//   hydrationUserOuncesToday.innerText = userRepo.hydrationData.filter(hydro => hydro.userId === user.id).find(hydro => hydro.date === todayDate).ounces;
-  // console.log('hydro', hydro);
-// }
+const renderDailyUserGlasses = (user, userRepo) => {
+  hydrationInfoGlassesToday.innerText = (userRepo.hydrationData.filter(hydro => hydro.userId === user.id).find(hydro => hydro.date === todayDate).ounces / 8).toFixed(0);
+}
 
 // hydrationUserOuncesToday.innerText = hydrationData.find(hydration => {
 //   return hydration.userID === user.id && hydration.date === todayDate;
