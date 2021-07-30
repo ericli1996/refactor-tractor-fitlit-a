@@ -143,7 +143,7 @@ const renderUserStairActivity = (user, userRepo) => {
   stairsFriendFlightsAverageToday.innerText = userRepo.calculateAverageStairs(todayDate);
   updateTrendingStairsDays(user);
   updateFriendsWeeklySteps(user, userRepo);
-  renderUserSleepHoursToday(user);
+  renderUserSleepToday(user);
 }
 
 const updateTrendingStairsDays = (user) => {
@@ -201,14 +201,10 @@ const renderAllUserDailyOz = (userRepo) => {
   hydrationFriendOuncesToday.innerText = userRepo.calculateAverageDailyWater(todayDate);
 }
 
-const renderUserSleepHoursToday = (user) => {
+const renderUserSleepToday = (user) => {
   sleepUserHoursToday.innerText = user.sleepHoursRecord.find(sleep => sleep.date === todayDate).hours;
+  sleepInfoQualityToday.innerText = user.sleepQualityRecord.find(sleep => sleep.date === todayDate).quality;
 }
-
-// sleepUserHoursToday.innerText = sleepData.find(sleep => {
-//     return sleep.userID === user.id && sleep.date === todayDate;
-//   }).hoursSlept;
-
 
 
 // sleepCalendarHoursAverageWeekly.innerText = user.calculateAverageHoursThisWeek(todayDate);
@@ -226,10 +222,7 @@ const renderUserSleepHoursToday = (user) => {
 // sleepInfoHoursAverageAlltime.innerText = user.hoursSleptAverage;
 //
 // sleepInfoQualityAverageAlltime.innerText = user.sleepQualityAverage;
-//
-// sleepInfoQualityToday.innerText = sleepData.find(sleep => {
-  //   return sleep.userID === user.id && sleep.date === todayDate;
-  // }).sleepQuality;
+
   //
 
 
