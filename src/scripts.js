@@ -113,16 +113,19 @@ const renderUser = (userRepo) => {
   headerName.innerText = `${randomUser.getFirstName()}'S `;
   renderUserStepsActivity(randomUser, userRepo);
   renderFriendStepActivity(userRepo);
+  renderUserStairActivity(randomUser, userRepo);
 }
 
 const renderUserStepsActivity = (user, userRepo) => {
+  updateTrendingStepDays(user);
+  // user.findTrendingStairsDays();
   stepsInfoActiveMinutesToday.innerText = user.activityRecord.find(activity => activity.date === todayDate).minutesActive;
   stepsUserStepsToday.innerText = user.activityRecord[0].steps;
   stepsInfoMilesWalkedToday.innerText = user.activityRecord[0].calculateMiles(userRepo);
-  user.findTrendingStepDays();
   trendingStepsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStepDays[0]}</p>`;
   stepsCalendarTotalActiveMinutesWeekly.innerText = user.calculateAverageMinutesActiveThisWeek(todayDate)
   stepsCalendarTotalStepsWeekly.innerText = user.calculateAverageStepsThisWeek(todayDate);
+  console.log("USER <>>>", user);
 }
 
 const renderFriendStepActivity = (userRepo) => {
@@ -131,12 +134,49 @@ const renderFriendStepActivity = (userRepo) => {
   stepsFriendStepsAverageToday.innerText = userRepo.calculateAverageSteps(todayDate);
 }
 
-// user.findFriendsNames(userRepository.users);
-//
-//
+const renderUserStairActivity = (user, userRepo) => {
+  stairsUserStairsToday.innerText = user.activityRecord.find(activity => activity.date === todayDate).flightsOfStairs * 12;
+  stairsInfoFlightsToday.innerText = user.activityRecord.find(activity => activity.date === todayDate).flightsOfStairs;
+  stairsCalendarFlightsAverageWeekly.innerText = user.calculateAverageFlightsThisWeek(todayDate);
+  stairsCalendarStairsAverageWeekly.innerText = (user.calculateAverageFlightsThisWeek(todayDate) * 12).toFixed(0);
+  stairsFriendFlightsAverageToday.innerText = userRepo.calculateAverageStairs(todayDate);
+  updateTrendingStairsDays(user);
+  updateFriendsWeeklySteps(user, userRepo);
+  console.log("userREPO <>>>>", userRepo);
+}
 
-// stairsTrendingButton.addEventListener('click', updateTrendingStairsDays());
-// stepsTrendingButton.addEventListener('click', updateTrendingStepDays);
+const updateTrendingStairsDays = (user) => {
+  user.findTrendingStairsDays();
+  trendingStairsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStairsDays[0]}</p>`;
+}
+
+const updateTrendingStepDays = (user) => {
+  user.findTrendingStepDays();
+  trendingStepsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStepDays[0]}</p>`;
+}
+
+const updateFriendsWeeklySteps = (user, userRepo) => {
+  user.findFriendsTotalStepsForWeek(userRepo.users, todayDate)
+  user.friendsActivityRecords.forEach(friend => {
+    dropdownFriendsStepsContainer.innerHTML += `
+    <p class='dropdown-p friends-steps'>${friend.firstName} |  ${friend.totalWeeklySteps}</p>
+    `;
+  })
+}
+
+// user.findFriendsTotalStepsForWeek(userRepository.users, todayDate);
+
+// stairsInfoFlightsToday.innerText = activityData.find(activity => {
+//   return activity.userID === user.id && activity.date === todayDate;
+// }).flightsOfStairs;
+//
+//
+//
+// stairsCalendarFlightsAverageWeekly.innerText = user.calculateAverageFlightsThisWeek(todayDate);
+//
+// stairsCalendarStairsAverageWeekly.innerText = (user.calculateAverageFlightsThisWeek(todayDate) * 12).toFixed(0);
+// user.findFriendsNames(userRepository.users);
+
 //
 function flipCard(cardToHide, cardToShow) {
   cardToHide.classList.add('hide');
@@ -204,11 +244,6 @@ function showInfo() {
   }
 }
 
-// function updateTrendingStairsDays() {
-//   user.findTrendingStairsDays();
-//   trendingStairsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStairsDays[0]}</p>`;
-// }
-
 
 // let sortedHydrationDataByDate = user.ouncesRecord.sort((a, b) => {
 //   if (Object.keys(a)[0] > Object.keys(b)[0]) {
@@ -262,24 +297,7 @@ function showInfo() {
 
 
 //
-//
-// stairsCalendarFlightsAverageWeekly.innerText = user.calculateAverageFlightsThisWeek(todayDate);
-//
-// stairsCalendarStairsAverageWeekly.innerText = (user.calculateAverageFlightsThisWeek(todayDate) * 12).toFixed(0);
-//
-// stairsFriendFlightsAverageToday.innerText = (userRepository.calculateAverageStairs(todayDate) / 12).toFixed(1);
-//
-// stairsInfoFlightsToday.innerText = activityData.find(activity => {
-//   return activity.userID === user.id && activity.date === todayDate;
-// }).flightsOfStairs;
-//
-// stairsUserStairsToday.innerText = activityData.find(activity => {
-//   return activity.userID === user.id && activity.date === todayDate;
-// }).flightsOfStairs * 12;
-//
-// stairsCalendarFlightsAverageWeekly.innerText = user.calculateAverageFlightsThisWeek(todayDate);
-//
-// stairsCalendarStairsAverageWeekly.innerText = (user.calculateAverageFlightsThisWeek(todayDate) * 12).toFixed(0);
+
 //
 // stairsTrendingButton.addEventListener('click', function () {
 //   user.findTrendingStairsDays();
@@ -293,7 +311,7 @@ function showInfo() {
 
 // stepsTrendingButton.addEventListener('click', function () {
 //   user.findTrendingStepDays();
-//   trendingStepsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStepDays[0]}</p>`;
+//
 // });
 
 
@@ -315,13 +333,9 @@ function showInfo() {
 //   return activity.userID === user.id && activity.date === todayDate;
 // }).numSteps;
 //
-// user.findFriendsTotalStepsForWeek(userRepository.users, todayDate);
+
 //
-// user.friendsActivityRecords.forEach(friend => {
-//   dropdownFriendsStepsContainer.innerHTML += `
-//   <p class='dropdown-p friends-steps'>${friend.firstName} |  ${friend.totalWeeklySteps}</p>
-//   `;
-// });
+
 //
 // let friendsStepsParagraphs = document.querySelectorAll('.friends-steps');
 //
