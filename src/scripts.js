@@ -112,18 +112,25 @@ const renderUser = (userRepo) => {
   // console.log('randomUser', randomUser);
   // console.log('randomUser activity record', randomUser.activityRecord);
 
-  updateTrendingStepDays(randomUser);
-  renderUserActivity(randomUser)
+  // updateTrendingStepDays(randomUser);
+  renderUserActivity(randomUser, userRepo)
 }
 
-const renderUserActivity = (user) => {
+const renderUserActivity = (user, userRepo) => {
   stepsInfoActiveMinutesToday.innerText = user.activityRecord.find(activity => activity.date === todayDate).minutesActive;
-  stepsUserStepsToday.innerText = `${user.activityRecord[0].steps}`
+  stepsUserStepsToday.innerText = user.activityRecord[0].steps;
+  stepsInfoMilesWalkedToday.innerText = user.activityRecord[0].calculateMiles(userRepo);
+  user.findTrendingStepDays();
+  trendingStepsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStepDays[0]}</p>`;
 
 //   userRepo.find(activity => {
 //   return activity.userID === user.id && activity.date === todayDate;
 // }).minutesActive;
 }
+
+// stepsInfoMilesWalkedToday.innerText = user.activityRecord.find(activity => {
+//   return (activity.date === todayDate && activity.userID === user.id)
+// }).calculateMiles(userRepository);
 
 // stepsFriendActiveMinutesAverageToday.innerText = userRepository.calculateAverageMinutesActive(todayDate);
 //
@@ -131,10 +138,7 @@ const renderUserActivity = (user) => {
 //
 // stepsFriendStepsAverageToday.innerText = userRepository.calculateAverageSteps(todayDate);
 //
-//
-// stepsUserStepsToday.innerText = activityData.find(activity => {
-//   return activity.userID === user.id && activity.date === todayDate;
-// }).numSteps;
+
 
 //
 // userRepository.sleepData = sleepData;
@@ -166,7 +170,7 @@ const renderUserActivity = (user) => {
 mainPage.addEventListener('click', showInfo);
 profileButton.addEventListener('click', showDropdown);
 // stairsTrendingButton.addEventListener('click', updateTrendingStairsDays());
-stepsTrendingButton.addEventListener('click', updateTrendingStepDays);
+// stepsTrendingButton.addEventListener('click', updateTrendingStepDays);
 //
 function flipCard(cardToHide, cardToShow) {
   cardToHide.classList.add('hide');
@@ -239,10 +243,10 @@ function showInfo() {
 //   trendingStairsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStairsDays[0]}</p>`;
 // }
 //
-function updateTrendingStepDays(randomUser) {
-  randomUser.findTrendingStepDays();
-  trendingStepsPhraseContainer.innerHTML = `<p class='trend-line'>${randomUser.trendingStepDays[0]}</p>`;
-}
+// function updateTrendingStepDays(randomUser) {
+//   randomUser.findTrendingStepDays();
+//   trendingStepsPhraseContainer.innerHTML = `<p class='trend-line'>${randomUser.trendingStepDays[0]}</p>`;
+// }
 
 // stepsTrendingButton.addEventListener('click', function () {
 //   user.findTrendingStepDays();
@@ -299,9 +303,7 @@ function updateTrendingStepDays(randomUser) {
     //   return sleep.userID === user.id && sleep.date === todayDate;
     // }).hoursSlept;
 
-// stepsInfoMilesWalkedToday.innerText = user.activityRecord.find(activity => {
-//   return (activity.date === todayDate && activity.userID === user.id)
-// }).calculateMiles(userRepository);
+
 //
 //
 // stairsCalendarFlightsAverageWeekly.innerText = user.calculateAverageFlightsThisWeek(todayDate);
