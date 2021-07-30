@@ -8,12 +8,11 @@ import Activity from './Activity';
 import Hydration from './Hydration';
 import Sleep from './Sleep';
 
-let user;
-let users;
+let user, users;
+let userRepository = new UserRepository();
 let sleep, sleepData;
 let hydrationData;
-let userRepository = new UserRepository();
-let todayDate = "2020/01/22";
+let todayDate = "2020/01/22"; //fix to be dynamic
 
 let dailyOz = document.querySelectorAll('.daily-oz');
 let dropdownEmail = document.querySelector('#dropdown-email');
@@ -73,10 +72,6 @@ let userInfoDropdown = document.querySelector('#user-info-dropdown');
 
 window.addEventListener('load', function() {
   setUpUserRepo();
-  // generateHydration();
-  // setUpHydrationRepo();
-  // generateSleep();
-  // setUpSleepData();
 })
 
 mainPage.addEventListener('click', showInfo);
@@ -119,7 +114,6 @@ const renderUser = (userRepo) => {
 
 const renderUserStepsActivity = (user, userRepo) => {
   updateTrendingStepDays(user);
-  // user.findTrendingStairsDays();
   stepsInfoActiveMinutesToday.innerText = user.activityRecord.find(activity => activity.date === todayDate).minutesActive;
   stepsUserStepsToday.innerText = user.activityRecord[0].steps;
   stepsInfoMilesWalkedToday.innerText = user.activityRecord[0].calculateMiles(userRepo);
@@ -156,19 +150,19 @@ const updateTrendingStepDays = (user) => {
   trendingStepsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStepDays[0]}</p>`;
 }
 
-let friendsStepsParagraphs = document.querySelectorAll('.friends-steps');
-
-friendsStepsParagraphs.forEach(paragraph => {
-  if (friendsStepsParagraphs[0] === paragraph) {
-    paragraph.classList.add('green-text');
-  }
-  if (friendsStepsParagraphs[friendsStepsParagraphs.length - 1] === paragraph) {
-    paragraph.classList.add('red-text');
-  }
-  if (paragraph.innerText.includes('YOU')) {
-    paragraph.classList.add('yellow-text');
-  }
-});
+// let friendsStepsParagraphs = document.querySelectorAll('.friends-steps');
+//
+// friendsStepsParagraphs.forEach(paragraph => {
+//   if (friendsStepsParagraphs[0] === paragraph) {
+//     paragraph.classList.add('green-text');
+//   }
+//   if (friendsStepsParagraphs[friendsStepsParagraphs.length - 1] === paragraph) {
+//     paragraph.classList.add('red-text');
+//   }
+//   if (paragraph.innerText.includes('YOU')) {
+//     paragraph.classList.add('yellow-text');
+//   }
+// });
 
 const updateFriendsWeeklySteps = (user, userRepo) => {
   user.findFriendsTotalStepsForWeek(userRepo.users, todayDate)
