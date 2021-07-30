@@ -11,6 +11,7 @@ import Sleep from './Sleep';
 let user;
 let users;
 let sleep, sleepData;
+let hydrationData;
 let userRepository = new UserRepository();
 let todayDate = "2020/01/22";
 
@@ -96,7 +97,7 @@ const setUpSleepData = (userRepository) => {
 
 const generateHydration = (userRepo) => {
   fetchAPIData('hydration')
-  .then(data => data.hydrationData.map(hydroObj => new Hydration(hydroObj, userRepo)))
+  .then(data => userRepo.hydrationData = data.hydrationData.map(hydroObj => new Hydration(hydroObj, userRepo)))
 }
 
 const generateActivity = (userRepo) => {
@@ -162,6 +163,7 @@ const updateFriendsWeeklySteps = (user, userRepo) => {
     <p class='dropdown-p friends-steps'>${friend.firstName} |  ${friend.totalWeeklySteps}</p>
     `;
     renderUserWeeklyOz(user);
+    renderDailyUserOz(user, userRepo);
   })
 }
 
@@ -187,15 +189,25 @@ const renderUserWeeklyOz = (user) => {
   }
 }
 
-hydrationUserOuncesToday.innerText = hydrationData.find(hydration => {
-  return hydration.userID === user.id && hydration.date === todayDate;
-}).numOunces;
+const renderDailyUserOz = (user, userRepo) => {
+  hydrationUserOuncesToday.innerText = userRepo.hydrationData.filter(hydro => hydro.userId === user.id).find(hydro => hydro.date === todayDate).ounces;
+  // console.log('hydro', hydro);
+}
 
-hydrationFriendOuncesToday.innerText = userRepository.calculateAverageDailyWater(todayDate);
+// const renderDailyUserGlasses = (user, userRepo) => {
+//   hydrationUserOuncesToday.innerText = userRepo.hydrationData.filter(hydro => hydro.userId === user.id).find(hydro => hydro.date === todayDate).ounces;
+  // console.log('hydro', hydro);
+// }
 
-hydrationInfoGlassesToday.innerText = hydrationData.find(hydration => {
-  return hydration.userID === user.id && hydration.date === todayDate;
-}).numOunces / 8;
+// hydrationUserOuncesToday.innerText = hydrationData.find(hydration => {
+//   return hydration.userID === user.id && hydration.date === todayDate;
+// }).numOunces;
+
+// hydrationFriendOuncesToday.innerText = userRepository.calculateAverageDailyWater(todayDate);
+
+// hydrationInfoGlassesToday.innerText = hydrationData.find(hydration => {
+//   return hydration.userID === user.id && hydration.date === todayDate;
+// }).numOunces / 8;
 
 
 // user.findFriendsTotalStepsForWeek(userRepository.users, todayDate);

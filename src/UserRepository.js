@@ -4,6 +4,7 @@ class UserRepository {
   constructor() {
     this.users = [];
     this.sleepData = [];
+    this.hydrationData = [];
   }
   getUser(id) {
     return this.users.find(function(user) {
