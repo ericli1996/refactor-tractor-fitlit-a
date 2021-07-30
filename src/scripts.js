@@ -156,6 +156,20 @@ const updateTrendingStepDays = (user) => {
   trendingStepsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStepDays[0]}</p>`;
 }
 
+let friendsStepsParagraphs = document.querySelectorAll('.friends-steps');
+
+friendsStepsParagraphs.forEach(paragraph => {
+  if (friendsStepsParagraphs[0] === paragraph) {
+    paragraph.classList.add('green-text');
+  }
+  if (friendsStepsParagraphs[friendsStepsParagraphs.length - 1] === paragraph) {
+    paragraph.classList.add('red-text');
+  }
+  if (paragraph.innerText.includes('YOU')) {
+    paragraph.classList.add('yellow-text');
+  }
+});
+
 const updateFriendsWeeklySteps = (user, userRepo) => {
   user.findFriendsTotalStepsForWeek(userRepo.users, todayDate)
   user.friendsActivityRecords.forEach(friend => {
@@ -289,40 +303,3 @@ function showInfo() {
     flipCard(event.target.parentNode, sleepMainCard);
   }
 }
-
-
-
-
-
-
-
-
-//
-// stepsFriendActiveMinutesAverageToday.innerText = userRepository.calculateAverageMinutesActive(todayDate);
-//
-// stepsFriendAverageStepGoal.innerText = `${userRepository.calculateAverageStepGoal()}`;
-//
-// stepsFriendStepsAverageToday.innerText = userRepository.calculateAverageSteps(todayDate);
-//
-// stepsInfoActiveMinutesToday.innerText = activityData.find(activity => {
-//   return activity.userID === user.id && activity.date === todayDate;
-// }).minutesActive;
-//
-// stepsUserStepsToday.innerText = activityData.find(activity => {
-//   return activity.userID === user.id && activity.date === todayDate;
-// }).numSteps;
-//
-
-// let friendsStepsParagraphs = document.querySelectorAll('.friends-steps');
-//
-// friendsStepsParagraphs.forEach(paragraph => {
-//   if (friendsStepsParagraphs[0] === paragraph) {
-//     paragraph.classList.add('green-text');
-//   }
-//   if (friendsStepsParagraphs[friendsStepsParagraphs.length - 1] === paragraph) {
-//     paragraph.classList.add('red-text');
-//   }
-//   if (paragraph.innerText.includes('YOU')) {
-//     paragraph.classList.add('yellow-text');
-//   }
-// });
