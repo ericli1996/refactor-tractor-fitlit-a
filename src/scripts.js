@@ -12,6 +12,7 @@ let user;
 let users;
 let sleep, sleepData;
 let userRepository = new UserRepository();
+let todayDate = "2020/01/22";
 
 let dailyOz = document.querySelectorAll('.daily-oz');
 let dropdownEmail = document.querySelector('#dropdown-email');
@@ -110,11 +111,31 @@ const renderUser = (userRepo) => {
   headerName.innerText = `${randomUser.getFirstName()}'S `;
   // console.log('randomUser', randomUser);
   // console.log('randomUser activity record', randomUser.activityRecord);
-  stepsUserStepsToday.innerText = `${randomUser.activityRecord[0].steps}`
+
   updateTrendingStepDays(randomUser);
+  renderUserActivity(randomUser)
 }
 
-console.log('global userRepo',  userRepository);
+const renderUserActivity = (user) => {
+  stepsInfoActiveMinutesToday.innerText = user.activityRecord.find(activity => activity.date === todayDate).minutesActive;
+  stepsUserStepsToday.innerText = `${user.activityRecord[0].steps}`
+
+//   userRepo.find(activity => {
+//   return activity.userID === user.id && activity.date === todayDate;
+// }).minutesActive;
+}
+
+// stepsFriendActiveMinutesAverageToday.innerText = userRepository.calculateAverageMinutesActive(todayDate);
+//
+// stepsFriendAverageStepGoal.innerText = `${userRepository.calculateAverageStepGoal()}`;
+//
+// stepsFriendStepsAverageToday.innerText = userRepository.calculateAverageSteps(todayDate);
+//
+//
+// stepsUserStepsToday.innerText = activityData.find(activity => {
+//   return activity.userID === user.id && activity.date === todayDate;
+// }).numSteps;
+
 //
 // userRepository.sleepData = sleepData;
 //
@@ -138,8 +159,7 @@ console.log('global userRepo',  userRepository);
 //   sleep = new Sleep(sleep, userRepository);
 // });
 //
-// user = userRepository.users[0];
-// let todayDate = "2019/09/22";
+
 // user.findFriendsNames(userRepository.users);
 //
 //
@@ -221,7 +241,6 @@ function showInfo() {
 //
 function updateTrendingStepDays(randomUser) {
   randomUser.findTrendingStepDays();
-  console.log(randomUser);
   trendingStepsPhraseContainer.innerHTML = `<p class='trend-line'>${randomUser.trendingStepDays[0]}</p>`;
 }
 
@@ -270,19 +289,20 @@ function updateTrendingStepDays(randomUser) {
 //
 // sleepInfoHoursAverageAlltime.innerText = user.hoursSleptAverage;
 //
+// sleepInfoQualityAverageAlltime.innerText = user.sleepQualityAverage;
+//
+// sleepInfoQualityToday.innerText = sleepData.find(sleep => {
+  //   return sleep.userID === user.id && sleep.date === todayDate;
+  // }).sleepQuality;
+  //
+  // sleepUserHoursToday.innerText = sleepData.find(sleep => {
+    //   return sleep.userID === user.id && sleep.date === todayDate;
+    // }).hoursSlept;
+
 // stepsInfoMilesWalkedToday.innerText = user.activityRecord.find(activity => {
 //   return (activity.date === todayDate && activity.userID === user.id)
 // }).calculateMiles(userRepository);
 //
-// sleepInfoQualityAverageAlltime.innerText = user.sleepQualityAverage;
-//
-// sleepInfoQualityToday.innerText = sleepData.find(sleep => {
-//   return sleep.userID === user.id && sleep.date === todayDate;
-// }).sleepQuality;
-//
-// sleepUserHoursToday.innerText = sleepData.find(sleep => {
-//   return sleep.userID === user.id && sleep.date === todayDate;
-// }).hoursSlept;
 //
 // stairsCalendarFlightsAverageWeekly.innerText = user.calculateAverageFlightsThisWeek(todayDate);
 //
