@@ -11,6 +11,7 @@ import Sleep from './Sleep';
 let user;
 let users;
 let sleep, sleepData;
+let hydrationData;
 let userRepository = new UserRepository();
 let todayDate = "2020/01/22";
 
@@ -96,7 +97,7 @@ const setUpSleepData = (userRepository) => {
 
 const generateHydration = (userRepo) => {
   fetchAPIData('hydration')
-  .then(data => data.hydrationData.map(hydroObj => new Hydration(hydroObj, userRepo)))
+  .then(data => userRepo.hydrationData = data.hydrationData.map(hydroObj => new Hydration(hydroObj, userRepo)))
 }
 
 const generateActivity = (userRepo) => {
@@ -161,7 +162,44 @@ const updateFriendsWeeklySteps = (user, userRepo) => {
     dropdownFriendsStepsContainer.innerHTML += `
     <p class='dropdown-p friends-steps'>${friend.firstName} |  ${friend.totalWeeklySteps}</p>
     `;
+    renderUserWeeklyOz(user);
+    renderDailyUserOz(user, userRepo);
   })
+}
+
+
+const sortHydrationDataByDate = (user) => {
+  const result = user.ouncesRecord.sort((a, b) => {
+  if (Object.keys(a)[0] > Object.keys(b)[0]) {
+    return -1;
+  }
+  if (Object.keys(a)[0] < Object.keys(b)[0]) {
+    return 1;
+  }
+  return 0;
+});
+return result;
+}
+
+const renderUserWeeklyOz = (user) => {
+  const sortedHydrationArray = sortHydrationDataByDate(user)
+  for (let i = 0; i < dailyOz.length; i++) {
+    dailyOz[i].innerText = user.addDailyOunces(Object.keys(sortedHydrationArray[i]))
+  }
+}
+
+const renderDailyUserOz = (user, userRepo) => {
+  hydrationUserOuncesToday.innerText = userRepo.hydrationData.filter(hydro => hydro.userId === user.id).find(hydro => hydro.date === todayDate).ounces;
+  renderDailyUserGlasses(user, userRepo);
+  renderAllUserDailyOz(userRepo);
+}
+
+const renderDailyUserGlasses = (user, userRepo) => {
+  hydrationInfoGlassesToday.innerText = (userRepo.hydrationData.filter(hydro => hydro.userId === user.id).find(hydro => hydro.date === todayDate).ounces / 8).toFixed(0);
+}
+
+const renderAllUserDailyOz = (userRepo) => {
+  hydrationFriendOuncesToday.innerText = userRepo.calculateAverageDailyWater(todayDate);
 }
 
 // user.findFriendsTotalStepsForWeek(userRepository.users, todayDate);
@@ -245,32 +283,6 @@ function showInfo() {
 }
 
 
-// let sortedHydrationDataByDate = user.ouncesRecord.sort((a, b) => {
-//   if (Object.keys(a)[0] > Object.keys(b)[0]) {
-//     return -1;
-//   }
-//   if (Object.keys(a)[0] < Object.keys(b)[0]) {
-//     return 1;
-//   }
-//   return 0;
-// });
-//
-// for (var i = 0; i < dailyOz.length; i++) {
-//   dailyOz[i].innerText = user.addDailyOunces(Object.keys(sortedHydrationDataByDate[i])[0])
-// }
-//
-//
-//
-// hydrationUserOuncesToday.innerText = hydrationData.find(hydration => {
-//   return hydration.userID === user.id && hydration.date === todayDate;
-// }).numOunces;
-//
-// hydrationFriendOuncesToday.innerText = userRepository.calculateAverageDailyWater(todayDate);
-//
-// hydrationInfoGlassesToday.innerText = hydrationData.find(hydration => {
-//   return hydration.userID === user.id && hydration.date === todayDate;
-// }).numOunces / 8;
-//
 // sleepCalendarHoursAverageWeekly.innerText = user.calculateAverageHoursThisWeek(todayDate);
 //
 // sleepCalendarQualityAverageWeekly.innerText = user.calculateAverageQualityThisWeek(todayDate);
