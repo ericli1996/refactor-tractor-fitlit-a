@@ -192,10 +192,15 @@ const renderUserWeeklyOz = (user) => {
 const renderDailyUserOz = (user, userRepo) => {
   hydrationUserOuncesToday.innerText = userRepo.hydrationData.filter(hydro => hydro.userId === user.id).find(hydro => hydro.date === todayDate).ounces;
   renderDailyUserGlasses(user, userRepo);
+  renderAllUserDailyOz(userRepo);
 }
 
 const renderDailyUserGlasses = (user, userRepo) => {
   hydrationInfoGlassesToday.innerText = (userRepo.hydrationData.filter(hydro => hydro.userId === user.id).find(hydro => hydro.date === todayDate).ounces / 8).toFixed(0);
+}
+
+const renderAllUserDailyOz = (userRepo) => {
+  hydrationFriendOuncesToday.innerText = userRepo.calculateAverageDailyWater(todayDate);
 }
 
 // hydrationUserOuncesToday.innerText = hydrationData.find(hydration => {
