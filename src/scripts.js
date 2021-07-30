@@ -78,13 +78,15 @@ window.addEventListener('load', function() {
   // setUpSleepData();
 })
 
+mainPage.addEventListener('click', showInfo);
+profileButton.addEventListener('click', showDropdown);
+
 const setUpUserRepo = () => {
   fetchAPIData('users')
   .then(data => userRepository.users = data.userData.map(userObj => new User(userObj, userRepository)))
   .then(data => setUpSleepData(userRepository))
   .then(data => generateHydration(userRepository))
   .then(data => generateActivity(userRepository))
-  // .then(data => renderUser(userRepository))
 }
 
 const setUpSleepData = (userRepository) => {
@@ -132,8 +134,7 @@ const renderFriendStepActivity = (userRepo) => {
 // user.findFriendsNames(userRepository.users);
 //
 //
-mainPage.addEventListener('click', showInfo);
-profileButton.addEventListener('click', showDropdown);
+
 // stairsTrendingButton.addEventListener('click', updateTrendingStairsDays());
 // stepsTrendingButton.addEventListener('click', updateTrendingStepDays);
 //
