@@ -139,7 +139,9 @@ const renderUserStairActivity = (user, userRepo) => {
   stairsInfoFlightsToday.innerText = user.activityRecord.find(activity => activity.date === todayDate).flightsOfStairs;
   stairsCalendarFlightsAverageWeekly.innerText = user.calculateAverageFlightsThisWeek(todayDate);
   stairsCalendarStairsAverageWeekly.innerText = (user.calculateAverageFlightsThisWeek(todayDate) * 12).toFixed(0);
+  stairsFriendFlightsAverageToday.innerText = userRepo.calculateAverageStairs(todayDate);
   updateTrendingStairsDays(user);
+  console.log("userREPO <>>>>", userRepo)
 }
 
 const updateTrendingStairsDays = (user) => {
@@ -156,7 +158,7 @@ const updateTrendingStepDays = (user) => {
 //
 
 //
-// stairsFriendFlightsAverageToday.innerText = (userRepository.calculateAverageStairs(todayDate) / 12).toFixed(1);
+
 //
 // stairsInfoFlightsToday.innerText = activityData.find(activity => {
 //   return activity.userID === user.id && activity.date === todayDate;
