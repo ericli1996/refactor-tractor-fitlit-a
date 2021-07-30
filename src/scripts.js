@@ -117,13 +117,15 @@ const renderUser = (userRepo) => {
 }
 
 const renderUserStepsActivity = (user, userRepo) => {
+  updateTrendingStepDays(user);
+  // user.findTrendingStairsDays();
   stepsInfoActiveMinutesToday.innerText = user.activityRecord.find(activity => activity.date === todayDate).minutesActive;
   stepsUserStepsToday.innerText = user.activityRecord[0].steps;
   stepsInfoMilesWalkedToday.innerText = user.activityRecord[0].calculateMiles(userRepo);
-  user.findTrendingStepDays();
   trendingStepsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStepDays[0]}</p>`;
   stepsCalendarTotalActiveMinutesWeekly.innerText = user.calculateAverageMinutesActiveThisWeek(todayDate)
   stepsCalendarTotalStepsWeekly.innerText = user.calculateAverageStepsThisWeek(todayDate);
+  console.log("USER <>>>", user);
 }
 
 const renderFriendStepActivity = (userRepo) => {
@@ -135,8 +137,18 @@ const renderFriendStepActivity = (userRepo) => {
 const renderUserStairActivity = (user, userRepo) => {
   stairsUserStairsToday.innerText = user.activityRecord.find(activity => activity.date === todayDate).flightsOfStairs * 12;
   stairsInfoFlightsToday.innerText = user.activityRecord.find(activity => activity.date === todayDate).flightsOfStairs;
+  updateTrendingStairsDays(user);
 }
 
+const updateTrendingStairsDays = (user) => {
+  user.findTrendingStairsDays();
+  trendingStairsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStairsDays[0]}</p>`;
+}
+
+const updateTrendingStepDays = (user) => {
+  user.findTrendingStepDays();
+  trendingStepsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStepDays[0]}</p>`;
+}
 
 // stairsCalendarFlightsAverageWeekly.innerText = user.calculateAverageFlightsThisWeek(todayDate);
 //
@@ -157,7 +169,7 @@ const renderUserStairActivity = (user, userRepo) => {
 //
 //
 
-// stairsTrendingButton.addEventListener('click', updateTrendingStairsDays());
+// stairsTRENDING STAIRSButton.addEventListener('click', updateTrendingStairsDays());
 // stepsTrendingButton.addEventListener('click', updateTrendingStepDays);
 //
 function flipCard(cardToHide, cardToShow) {
@@ -226,11 +238,6 @@ function showInfo() {
   }
 }
 
-// function updateTrendingStairsDays() {
-//   user.findTrendingStairsDays();
-//   trendingStairsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStairsDays[0]}</p>`;
-// }
-
 
 // let sortedHydrationDataByDate = user.ouncesRecord.sort((a, b) => {
 //   if (Object.keys(a)[0] > Object.keys(b)[0]) {
@@ -298,7 +305,7 @@ function showInfo() {
 
 // stepsTrendingButton.addEventListener('click', function () {
 //   user.findTrendingStepDays();
-//   trendingStepsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStepDays[0]}</p>`;
+//
 // });
 
 
