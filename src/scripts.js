@@ -199,6 +199,7 @@ const renderDailyUserGlasses = (user, userRepo) => {
 
 const renderAllUserDailyOz = (userRepo) => {
   hydrationFriendOuncesToday.innerText = userRepo.calculateAverageDailyWater(todayDate);
+  renderBestWorstSleep(userRepo);
 }
 
 const renderUserSleepToday = (user) => {
@@ -214,24 +215,14 @@ const renderUserAvgSleep = (user) => {
   sleepCalendarQualityAverageWeekly.innerText = user.calculateAverageQualityThisWeek(todayDate);
 }
 
-
-//
-// sleepFriendLongestSleeper.innerText = userRepository.users.find(user => {
-//   return user.id === userRepository.getLongestSleepers(todayDate)
-// }).getFirstName();
-//
-// sleepFriendWorstSleeper.innerText = userRepository.users.find(user => {
-//   return user.id === userRepository.getWorstSleepers(todayDate)
-// }).getFirstName();
-//
-//
-
-  //
-
-
-
-
-
+const renderBestWorstSleep = (userRepo) => {
+  sleepFriendLongestSleeper.innerText = userRepository.users.find(user => {
+    return user.id === userRepository.getLongestSleepers(todayDate)
+  }).getFirstName();
+  sleepFriendWorstSleeper.innerText = userRepository.users.find(user => {
+    return user.id === userRepository.getWorstSleepers(todayDate)
+  }).getFirstName();
+}
 
 function flipCard(cardToHide, cardToShow) {
   cardToHide.classList.add('hide');
