@@ -6,6 +6,7 @@
     <title>FitLit</title>
     <link href="https://fonts.googleapis.com/css?family=Oswald:400,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/10ffbe374d.js" crossorigin="anonymous"></script>
   </head>
   <body>
     <header>
@@ -229,6 +230,47 @@
           </div>
         </section>
       </section>
+
+      <section class='card-container input-card-container' id='input-card-container'>
+        <section class='main-card' id='inputMainCard'>
+          <h3 class='input-card-title'>ADD A NEW LOG</h3>
+          <div class='input-card-top-row' id='inputCardTopRow'>
+            <!-- <button type='button' name='add-activity-button' class='add-activity-button'><i class="fas fa-shoe-prints"></i></button> -->
+            <i class="fas fa-shoe-prints" id='addNewActivity'></i>
+            <i class="fas fa-tint" id='addNewHydro'></i>
+            <i class="fas fa-bed" id='addNewSleep'></i>
+          </div>
+        </section>
+        <section class='input-card hide' id='addActivityCard'>
+          <h3>placeholder activity</h3>
+          <form>
+            <input type="number" min="0" placeholder="steps" name="numSteps" required />
+            <input type="number" min="0" placeholder="minutes" name="minutesActive" required />
+            <input type="number" min="0" placeholder="flights" name="flightsOfStairs" required />
+            <input type="submit" value="Add Activity!" />
+          </form>
+          <!-- <button type='button' name='button' class='input-go-back-button'></button> -->
+          <i class="fas fa-undo-alt"></i>
+        </section>
+        <section class='input-card hide' id='addHydrationCard'>
+          <h3>placeholder hydration</h3>
+          <form>
+            <input type="number" min="0" placeholder="Ounces" name="numOunces" required />
+            <input type="submit" value="Add Hydration!" />
+          </form>
+          <i class="fas fa-undo-alt"></i>
+        </section>
+        <section class='input-card hide' id='addSleepCard'>
+          <h3>placeholder sleep</h3>
+          <form>
+            <input type="number" min="0" placeholder="hours" name="hoursSlept" required />
+            <input type="number" min="0" placeholder="quality" name="sleepQuality" required />
+            <input type="submit" value="Add Sleep!" />
+          </form>
+          <i class="fas fa-undo-alt"></i>
+        </section>
+      </section>
+
     </main>  
     <script src="bundle.js"></script>
   </body>

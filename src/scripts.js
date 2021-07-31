@@ -69,6 +69,9 @@ let stepsUserStepsToday = document.querySelector('#steps-user-steps-today');
 let trendingStepsPhraseContainer = document.querySelector('.trending-steps-phrase-container');
 let trendingStairsPhraseContainer = document.querySelector('.trending-stairs-phrase-container');
 let userInfoDropdown = document.querySelector('#user-info-dropdown');
+let addNewIcons = document.getElementById('inputCardTopRow');
+let inputMainCard = document.getElementById('inputMainCard');
+let addActivityCard = document.getElementById('addActivityCard');
 
 window.addEventListener('load', function() {
   setUpUserRepo();
@@ -76,6 +79,7 @@ window.addEventListener('load', function() {
 
 mainPage.addEventListener('click', showInfo);
 profileButton.addEventListener('click', showDropdown);
+addNewIcons.addEventListener('click', showForm);
 
 const setUpUserRepo = () => {
   fetchAPIData('users')
@@ -241,6 +245,18 @@ function showDropdown() {
   userInfoDropdown.classList.toggle('hide');
 }
 
+function showForm() {
+  if(event.target.classList.contains('fa-shoe-prints')) {
+    flipCard(inputMainCard, addActivityCard);
+  }
+  if(event.target.classList.contains('fa-tint')) {
+    flipCard(inputMainCard, addHydrationCard);
+  }
+  if(event.target.classList.contains('fa-bed')) {
+    flipCard(inputMainCard, addSleepCard);
+  }
+}
+
 function showInfo() {
   if (event.target.classList.contains('steps-info-button')) {
     flipCard(stepsMainCard, stepsInfoCard);
@@ -297,3 +313,4 @@ function showInfo() {
     flipCard(event.target.parentNode, sleepMainCard);
   }
 }
+
