@@ -252,7 +252,9 @@ function showForm() {
   if(event.target.classList.contains('fa-tint')) {
     flipCard(inputMainCard, addHydrationCard);
   }
-  
+  if(event.target.classList.contains('fa-bed')) {
+    flipCard(inputMainCard, addSleepCard);
+  }
 }
 
 function showInfo() {
