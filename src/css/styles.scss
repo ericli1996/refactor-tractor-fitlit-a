@@ -75,6 +75,11 @@ h3 {
   letter-spacing: .2em;
 }
 
+.input-card-title {
+  margin-bottom: 3%;
+  margin-top: -3%;
+}
+
 h4 {
   font-size: 6vw;
 }
@@ -102,7 +107,8 @@ main {
   display: grid;
   grid-template-areas:
   'steps hydration'
-  'stairs sleep';
+  'stairs sleep'
+  'input input';
   height: 100%;
 }
 
@@ -121,8 +127,27 @@ main {
   width: 100%;
 }
 
+.input-card-top-row {
+  display: flex;
+  justify-content: space-around;
+  width: 80%;
+}
+
+.fas {
+  font-size: 4em;
+}
+
 .main-card-bottom-row {
   text-align: center;
+  width: 100%;
+}
+
+.input-card-container {
+  background-color: limegreen;
+  grid-area: input;
+  margin-top: .5vw;
+  // display: flex;
+  // justify-content: space-evenly;
   width: 100%;
 }
 
