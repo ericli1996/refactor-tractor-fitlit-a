@@ -249,6 +249,10 @@ function showForm() {
   if(event.target.classList.contains('fa-shoe-prints')) {
     flipCard(inputMainCard, addActivityCard);
   }
+  if(event.target.classList.contains('fa-tint')) {
+    flipCard(inputMainCard, addHydrationCard);
+  }
+  
 }
 
 function showInfo() {
