@@ -72,6 +72,13 @@ let userInfoDropdown = document.querySelector('#user-info-dropdown');
 let addNewIcons = document.getElementById('inputCardTopRow');
 let inputMainCard = document.getElementById('inputMainCard');
 let addActivityCard = document.getElementById('addActivityCard');
+let addHydrationCard = document.getElementById('addHydrationCard');
+let addSleepCard = document.getElementById('addSleepCard');
+let inputBackButton = document.querySelectorAll('.fa-undo-alt');
+let inputCard = document.querySelector('.input-card');
+let activityBackButton = document.getElementById('activityBackButton');
+let hydrationBackButton = document.getElementById('hydrationBackButton');
+let sleepBackButton = document.getElementById('sleepBackButton');
 
 window.addEventListener('load', function() {
   setUpUserRepo();
@@ -80,6 +87,11 @@ window.addEventListener('load', function() {
 mainPage.addEventListener('click', showInfo);
 profileButton.addEventListener('click', showDropdown);
 addNewIcons.addEventListener('click', showForm);
+inputBackButton.forEach(button => button.addEventListener('click', returnToNewLog))
+// activityBackButton.addEventListener('click', returnToNewLog);
+// hydrationBackButton.addEventListener('click', returnToNewLog);
+// sleepBackButton.addEventListener('click', returnToNewLog);
+
 
 const setUpUserRepo = () => {
   fetchAPIData('users')
@@ -257,6 +269,18 @@ function showForm() {
   }
 }
 
+function returnToNewLog() {
+  if(event.target.id === 'activityBackButton') {
+    flipCard(addActivityCard, inputMainCard);
+  }
+  if(event.target.id === 'hydrationBackButton') {
+    flipCard(addHydrationCard, inputMainCard);
+  }
+  if(event.target.id === 'sleepBackButton') {
+    flipCard(addSleepCard, inputMainCard);
+  }
+}
+
 function showInfo() {
   if (event.target.classList.contains('steps-info-button')) {
     flipCard(stepsMainCard, stepsInfoCard);
@@ -313,4 +337,3 @@ function showInfo() {
     flipCard(event.target.parentNode, sleepMainCard);
   }
 }
-
