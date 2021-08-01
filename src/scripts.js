@@ -8,7 +8,7 @@ import Activity from './Activity';
 import Hydration from './Hydration';
 import Sleep from './Sleep';
 
-let user, users;
+let user, users, randomUser;
 let userRepository = new UserRepository();
 let sleep, sleepData;
 let hydrationData;
@@ -79,6 +79,10 @@ let inputCard = document.querySelector('.input-card');
 let activityBackButton = document.getElementById('activityBackButton');
 let hydrationBackButton = document.getElementById('hydrationBackButton');
 let sleepBackButton = document.getElementById('sleepBackButton');
+let activityForm = document.getElementById('activityForm');
+let hydrationForm = document.getElementById('hydrationForm');
+let sleepForm = document.getElementById('sleepForm');
+let error = document.querySelectorAll('.error');
 
 window.addEventListener('load', function() {
   setUpUserRepo();
@@ -87,7 +91,11 @@ window.addEventListener('load', function() {
 mainPage.addEventListener('click', showInfo);
 profileButton.addEventListener('click', showDropdown);
 addNewIcons.addEventListener('click', showForm);
-inputBackButton.forEach(button => button.addEventListener('click', returnToNewLog))
+inputBackButton.forEach(button => button.addEventListener('click', returnToNewLog));
+activityForm.addEventListener('submit', getActivityFormData);
+// hydrationForm.addEventListener('submit', getHydrationFormData);
+// sleepForm.addEventListener('submit', getSleepFormData);
+
 // activityBackButton.addEventListener('click', returnToNewLog);
 // hydrationBackButton.addEventListener('click', returnToNewLog);
 // sleepBackButton.addEventListener('click', returnToNewLog);
@@ -117,15 +125,16 @@ const generateActivity = (userRepo) => {
   .then(data => renderUser(userRepository))
 }
 
-const renderUser = (userRepo) => {
-  let randomUser = userRepo.users[Math.floor(Math.random() * userRepo.users.length)];
+const renderUser = () => {
+  randomUser = userRepository.users[Math.floor(Math.random() * userRepository.users.length)];
   dropdownGoal.innerText = `DAILY STEP GOAL | ${randomUser.dailyStepGoal}`;
   dropdownEmail.innerText = `EMAIL | ${randomUser.email}`;
   dropdownName.innerText = randomUser.name.toUpperCase();
   headerName.innerText = `${randomUser.getFirstName()}'S `;
-  renderUserStepsActivity(randomUser, userRepo);
-  renderFriendStepActivity(userRepo);
-  renderUserStairActivity(randomUser, userRepo);
+  renderUserStepsActivity(randomUser, userRepository);
+  renderFriendStepActivity(userRepository);
+  renderUserStairActivity(randomUser, userRepository);
+  // getActivityFormData(randomUser);
 }
 
 const renderUserStepsActivity = (user, userRepo) => {
@@ -136,8 +145,10 @@ const renderUserStepsActivity = (user, userRepo) => {
   trendingStepsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStepDays[0]}</p>`;
   stepsCalendarTotalActiveMinutesWeekly.innerText = user.calculateAverageMinutesActiveThisWeek(todayDate)
   stepsCalendarTotalStepsWeekly.innerText = user.calculateAverageStepsThisWeek(todayDate);
-  console.log("USER <>>>", user);
+  // console.log("USER <>>>", user);
 }
+
+console.log(userRepository)
 
 const renderFriendStepActivity = (userRepo) => {
   stepsFriendActiveMinutesAverageToday.innerText = userRepo.calculateAverageMinutesActive(todayDate);
@@ -166,19 +177,6 @@ const updateTrendingStepDays = (user) => {
   trendingStepsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStepDays[0]}</p>`;
 }
 
-// let friendsStepsParagraphs = document.querySelectorAll('.friends-steps');
-//
-// friendsStepsParagraphs.forEach(paragraph => {
-//   if (friendsStepsParagraphs[0] === paragraph) {
-//     paragraph.classList.add('green-text');
-//   }
-//   if (friendsStepsParagraphs[friendsStepsParagraphs.length - 1] === paragraph) {
-//     paragraph.classList.add('red-text');
-//   }
-//   if (paragraph.innerText.includes('YOU')) {
-//     paragraph.classList.add('yellow-text');
-//   }
-// });
 
 const updateFriendsWeeklySteps = (user, userRepo) => {
   user.findFriendsTotalStepsForWeek(userRepo.users, todayDate)
@@ -191,6 +189,19 @@ const updateFriendsWeeklySteps = (user, userRepo) => {
   })
 }
 
+let friendsStepsParagraphs = document.querySelectorAll('.friends-steps');
+
+friendsStepsParagraphs.forEach(paragraph => {
+  if (friendsStepsParagraphs[0] === paragraph) {
+    paragraph.classList.add('green-text');
+  }
+  if (friendsStepsParagraphs[friendsStepsParagraphs.length - 1] === paragraph) {
+    paragraph.classList.add('red-text');
+  }
+  if (paragraph.innerText.includes('YOU')) {
+    paragraph.classList.add('yellow-text');
+  }
+});
 const sortHydrationDataByDate = (user) => {
   const result = user.ouncesRecord.sort((a, b) => {
   if (Object.keys(a)[0] > Object.keys(b)[0]) {
@@ -337,3 +348,38 @@ function showInfo() {
     flipCard(event.target.parentNode, sleepMainCard);
   }
 }
+
+function getActivityFormData (event) {
+  event.preventDefault();
+  const formData = new FormData(event.target);
+  const newActivity = {
+    userID: randomUser.id,
+    date: todayDate,
+    numSteps: formData.get('numSteps'),
+    minutesActive: formData.get('minutesActive'),
+    flightsOfStairs: formData.get('flightsOfStairs')
+  };
+  postNewActivity(newActivity);
+  event.target.reset();
+}
+
+function postNewActivity(activity) {
+  fetch('http://localhost:3001/api/v1/activity', {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(activity)
+  })
+    .then((res) => checkForError(res))
+    .catch((err) => console.log(err))
+    // .then((activity) => )
+}
+
+const checkForError = (response) => {
+  console.log(response);
+  if (!response.ok) {
+    error.forEach(error => error.innerText = "Please make sure that all fields are filled out.");
+    throw new Error("Please make sure that all fields are filled out.");
+  } else {
+    return response.json();
+  }
+};
