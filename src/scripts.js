@@ -99,17 +99,25 @@ addNewIcons.addEventListener('click', function() {
 });
 activityForm.addEventListener('submit', function() {
   getActivityFormData(event);
+  displayPostData("activity");
 });
 hydrationForm.addEventListener('submit', function() {
   getHydrationFormData(event);
+  displayPostData("hydration");
 });
 sleepForm.addEventListener('submit', function() {
   getSleepFormData(event);
+  displayPostData("sleep");
 });
-inputBackButton.forEach(button => button.addEventListener('click', returnToNewLog));
+inputBackButton.forEach(button => button.addEventListener('click', function() {
+  returnToNewLog(event);
+}));
 
 const start = () => {
   setUpUserRepo();
+  // setUpSleepData();
+  // generateHydration();
+  // generateActivity();
 }
 
 const setUpUserRepo = () => {
@@ -130,21 +138,22 @@ const generateHydration = () => {
   .then(data => userRepository.hydrationData = data.hydrationData.map(hydroObj => new Hydration(hydroObj, userRepository)))
 }
 
+
 const generateActivity = () => {
   fetchAPIData('activity')
   .then(data => data.activityData.map(activityObj => new Activity(activityObj, userRepository)))
-  .then(data => renderUser())
+  .then(data => renderUser(randomUser))
+  randomUser = userRepository.users[Math.floor(Math.random() * userRepository.users.length)];
 }
 
-const renderUser = () => {
-  randomUser = userRepository.users[Math.floor(Math.random() * userRepository.users.length)];
-  dropdownGoal.innerText = `DAILY STEP GOAL | ${randomUser.dailyStepGoal}`;
-  dropdownEmail.innerText = `EMAIL | ${randomUser.email}`;
-  dropdownName.innerText = randomUser.name.toUpperCase();
-  headerName.innerText = `${randomUser.getFirstName()}'S `;
-  renderUserStepsActivity(randomUser, userRepository);
+const renderUser = (user) => {
+  dropdownGoal.innerText = `DAILY STEP GOAL | ${user.dailyStepGoal}`;
+  dropdownEmail.innerText = `EMAIL | ${user.email}`;
+  dropdownName.innerText = user.name.toUpperCase();
+  headerName.innerText = `${user.getFirstName()}'S `;
+  renderUserStepsActivity(user, userRepository);
   renderFriendStepActivity(userRepository);
-  renderUserStairActivity(randomUser, userRepository);
+  renderUserStairActivity(user, userRepository);
 }
 
 const renderUserStepsActivity = () => {
@@ -152,7 +161,7 @@ const renderUserStepsActivity = () => {
   stepsInfoActiveMinutesToday.innerText = randomUser.activityRecord.find(activity => activity.date === todayDate).minutesActive;
   stepsUserStepsToday.innerText = randomUser.activityRecord[0].steps;
   stepsInfoMilesWalkedToday.innerText = randomUser.activityRecord[0].calculateMiles(userRepository);
-  trendingStepsPhraseContainer.innerHTML = `<p class='trend-line'>${randomUser.trendingStepDays[0]}</p>`;
+  // trendingStepsPhraseContainer.innerHTML = `<p class='trend-line'>${randomUser.trendingStepDays[0]}</p>`;
   stepsCalendarTotalActiveMinutesWeekly.innerText = randomUser.calculateAverageMinutesActiveThisWeek(todayDate)
   stepsCalendarTotalStepsWeekly.innerText = randomUser.calculateAverageStepsThisWeek(todayDate);
 }
@@ -194,18 +203,18 @@ const updateFriendsWeeklySteps = (user, userRepo) => {
     renderDailyUserOz(user, userRepo);
   })
 }
-
-friendsStepsParagraphs.forEach(paragraph => {
-  if (friendsStepsParagraphs[0] === paragraph) {
-    paragraph.classList.add('green-text');
-  }
-  if (friendsStepsParagraphs[friendsStepsParagraphs.length - 1] === paragraph) {
-    paragraph.classList.add('red-text');
-  }
-  if (paragraph.innerText.includes('YOU')) {
-    paragraph.classList.add('yellow-text');
-  }
-})
+//
+// friendsStepsParagraphs.forEach(paragraph => {
+//   if (friendsStepsParagraphs[0] === paragraph) {
+//     paragraph.classList.add('green-text');
+//   }
+//   if (friendsStepsParagraphs[friendsStepsParagraphs.length - 1] === paragraph) {
+//     paragraph.classList.add('red-text');
+//   }
+//   if (paragraph.innerText.includes('YOU')) {
+//     paragraph.classList.add('yellow-text');
+//   }
+// })
 
 const sortHydrationDataByDate = (user) => {
   const result = user.ouncesRecord.sort((a, b) => {
@@ -227,19 +236,19 @@ const renderUserWeeklyOz = (user) => {
   }
 }
 
-const renderDailyUserOz = (user, userRepo) => {
-  hydrationUserOuncesToday.innerText = userRepo.hydrationData.filter(hydro => hydro.userId === user.id).find(hydro => hydro.date === todayDate).ounces;
-  renderDailyUserGlasses(user, userRepo);
-  renderAllUserDailyOz(userRepo);
+const renderDailyUserOz = (user) => {
+  hydrationUserOuncesToday.innerText = user.ouncesRecord[0][todayDate];
+  renderDailyUserGlasses(user);
+  renderAllUserDailyOz();
 }
 
-const renderDailyUserGlasses = (user, userRepo) => {
-  hydrationInfoGlassesToday.innerText = (userRepo.hydrationData.filter(hydro => hydro.userId === user.id).find(hydro => hydro.date === todayDate).ounces / 8).toFixed(0);
+const renderDailyUserGlasses = (user) => {
+  hydrationInfoGlassesToday.innerText = (user.ouncesRecord[0][todayDate] / 8).toFixed(0);
 }
 
-const renderAllUserDailyOz = (userRepo) => {
-  hydrationFriendOuncesToday.innerText = Math.round(userRepo.calculateAverageDailyWater(todayDate));
-  renderBestWorstSleep(userRepo);
+const renderAllUserDailyOz = () => {
+  hydrationFriendOuncesToday.innerText = Math.round(userRepository.calculateAverageDailyWater(todayDate));
+  renderBestWorstSleep(userRepository);
 }
 
 const renderUserSleepToday = (user) => {
@@ -285,7 +294,7 @@ const showForm = (event) => {
   }
 }
 
-function returnToNewLog() {
+const returnToNewLog = (event) => {
   if(event.target.id === 'activityBackButton') {
     flipCard(addActivityCard, inputMainCard);
   }
@@ -360,12 +369,14 @@ const getActivityFormData = (event) => {
   const newActivity = {
     userID: randomUser.id,
     date: todayDate,
-    numSteps: formData.get('numSteps'),
-    minutesActive: formData.get('minutesActive'),
-    flightsOfStairs: formData.get('flightsOfStairs')
+    numSteps: JSON.parse(formData.get('numSteps')),
+    minutesActive: JSON.parse(formData.get('minutesActive')),
+    flightsOfStairs: JSON.parse(formData.get('flightsOfStairs'))
   }
   postNewActivity(newActivity);
+
   event.target.reset();
+
 }
 
 const getHydrationFormData = (event) => {
@@ -374,7 +385,7 @@ const getHydrationFormData = (event) => {
   const newHydration = {
     userID: randomUser.id,
     date: todayDate,
-    numOunces: formData.get('numOunces')
+    numOunces: JSON.parse(formData.get('numOunces'))
   }
   postNewHydration(newHydration);
   event.target.reset();
@@ -386,9 +397,66 @@ const getSleepFormData = (event) => {
   const newSleep = {
     userID: randomUser.id,
     date: todayDate,
-    hoursSlept: formData.get('hoursSlept'),
-    sleepQuality: formData.get('sleepQuality')
+    hoursSlept: JSON.parse(formData.get('hoursSlept')),
+    sleepQuality: JSON.parse(formData.get('sleepQuality'))
   }
   postNewSleep(newSleep);
   event.target.reset();
 }
+
+const displayPostData = (dataType) => {
+  if (dataType === "activity") {
+    fetchAPIData("activity")
+    .then(data => data.activityData.map(activityObj => new Activity(activityObj, userRepository)))
+    .then(data => renderUserStepsActivity(randomUser))
+    .then(data => renderUserStairActivity(randomUser, userRepository))
+    console.log(randomUser);
+    // renderUserStepsActivity(randomUser)
+
+  }
+  if (dataType === "hydration") {
+    fetchAPIData("hydration")
+    .then(data => userRepository.hydrationData = data.hydrationData.map(hydroObj => new Hydration(hydroObj, userRepository)))
+    .then(data => renderUserWeeklyOz(randomUser))
+    .then(data => renderDailyUserOz(randomUser))
+        console.log(randomUser);
+  }
+  if (dataType === "sleep") {
+    fetchAPIData("sleep")
+    .then(data => userRepository.sleepData = data.sleepData.map(sleepObj => new Sleep(sleepObj, userRepository)))
+
+  }
+
+}
+
+// const renderUserStepsActivity = () => {
+//   updateTrendingStepDays(randomUser);
+//   stepsInfoActiveMinutesToday.innerText = randomUser.activityRecord.find(activity => activity.date === todayDate).minutesActive;
+//   stepsUserStepsToday.innerText = randomUser.activityRecord[0].steps;
+//   stepsInfoMilesWalkedToday.innerText = randomUser.activityRecord[0].calculateMiles(userRepository);
+//   trendingStepsPhraseContainer.innerHTML = `<p class='trend-line'>${randomUser.trendingStepDays[0]}</p>`;
+//   stepsCalendarTotalActiveMinutesWeekly.innerText = randomUser.calculateAverageMinutesActiveThisWeek(todayDate)
+//   stepsCalendarTotalStepsWeekly.innerText = randomUser.calculateAverageStepsThisWeek(todayDate);
+// }
+//
+// const renderFriendStepActivity = (userRepo) => {
+//   stepsFriendActiveMinutesAverageToday.innerText = userRepo.calculateAverageMinutesActive(todayDate);
+//   stepsFriendAverageStepGoal.innerText = userRepo.calculateAverageStepGoal();
+//   stepsFriendStepsAverageToday.innerText = userRepo.calculateAverageSteps(todayDate);
+// }
+//
+// const renderUserStairActivity = (user, userRepo) => {
+//   stairsUserStairsToday.innerText = user.activityRecord.find(activity => activity.date === todayDate).flightsOfStairs * 12;
+//   stairsInfoFlightsToday.innerText = user.activityRecord.find(activity => activity.date === todayDate).flightsOfStairs;
+//   stairsCalendarFlightsAverageWeekly.innerText = user.calculateAverageFlightsThisWeek(todayDate);
+//   stairsCalendarStairsAverageWeekly.innerText = (user.calculateAverageFlightsThisWeek(todayDate) * 12).toFixed(0);
+//   stairsFriendFlightsAverageToday.innerText = userRepo.calculateAverageStairs(todayDate);
+//   updateTrendingStairsDays(user);
+//   updateFriendsWeeklySteps(user, userRepo);
+//   renderUserSleepToday(user);
+// }
+//
+// const updateTrendingStairsDays = (user) => {
+//   user.findTrendingStairsDays();
+//   trendingStairsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStairsDays[0]}</p>`;
+// }
