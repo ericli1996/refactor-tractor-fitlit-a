@@ -24,6 +24,16 @@ const postNewHydration = (hydro) => {
     .catch((err) => console.log(err))
 }
 
+const postNewSleep = (sleep) => {
+  fetch('http://localhost:3001/api/v1/sleep', {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(sleep)
+  })
+    .then((res) => checkForError(res))
+    .catch((err) => console.log(err))
+}
+
 const checkForError = (response) => {
   console.log(response)
   if (!response.ok) {
@@ -34,4 +44,4 @@ const checkForError = (response) => {
   }
 }
 
-export { fetchAPIData, postNewActivity, postNewHydration };
+export { fetchAPIData, postNewActivity, postNewHydration, postNewSleep };

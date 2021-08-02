@@ -1,6 +1,6 @@
 import './css/base.scss';
 import './css/styles.scss';
-import { fetchAPIData, postNewActivity, postNewHydration } from './api-Calls';
+import { fetchAPIData, postNewActivity, postNewHydration, postNewSleep } from './api-Calls';
 
 import UserRepository from './UserRepository';
 import User from './User';
@@ -86,19 +86,28 @@ let error = document.querySelectorAll('.error');
 
 window.addEventListener('load', function() {
   setUpUserRepo();
-})
-
-mainPage.addEventListener('click', showInfo);
-profileButton.addEventListener('click', showDropdown);
-addNewIcons.addEventListener('click', showForm);
+});
+mainPage.addEventListener('click', function() {
+  showInfo(event);
+});
+profileButton.addEventListener('click', function() {
+  showDropdown();
+});
+addNewIcons.addEventListener('click', function() {
+  showForm(event);
+});
+activityForm.addEventListener('submit', function() {
+  getActivityFormData(event);
+});
+hydrationForm.addEventListener('submit', function() {
+  getHydrationFormData(event);
+});
+sleepForm.addEventListener('submit', function() {
+  getSleepFormData(event);
+});
 inputBackButton.forEach(button => button.addEventListener('click', returnToNewLog));
-activityForm.addEventListener('submit', getActivityFormData);
-hydrationForm.addEventListener('submit', getHydrationFormData);
-// sleepForm.addEventListener('submit', getSleepFormData);
 
-// activityBackButton.addEventListener('click', returnToNewLog);
-// hydrationBackButton.addEventListener('click', returnToNewLog);
-// sleepBackButton.addEventListener('click', returnToNewLog);
+
 
 
 const setUpUserRepo = () => {
@@ -264,11 +273,11 @@ function flipCard(cardToHide, cardToShow) {
   cardToShow.classList.remove('hide');
 }
 
-function showDropdown() {
+const showDropdown = () => {
   userInfoDropdown.classList.toggle('hide');
 }
 
-function showForm() {
+const showForm = (event) => {
   if(event.target.classList.contains('fa-shoe-prints')) {
     flipCard(inputMainCard, addActivityCard);
   }
@@ -292,7 +301,7 @@ function returnToNewLog() {
   }
 }
 
-function showInfo() {
+const showInfo = (event) => {
   if (event.target.classList.contains('steps-info-button')) {
     flipCard(stepsMainCard, stepsInfoCard);
   }
@@ -349,7 +358,7 @@ function showInfo() {
   }
 }
 
-function getActivityFormData (event) {
+const getActivityFormData = (event) => {
   event.preventDefault();
   const formData = new FormData(event.target);
   const newActivity = {
@@ -363,7 +372,7 @@ function getActivityFormData (event) {
   event.target.reset();
 }
 
-function getHydrationFormData(event) {
+const getHydrationFormData = (event) => {
   event.preventDefault();
   const formData = new FormData(event.target);
   const newHydration = {
@@ -372,4 +381,18 @@ function getHydrationFormData(event) {
     numOunces: formData.get('numOunces')
   }
   postNewHydration(newHydration);
+  event.target.reset();
+}
+
+const getSleepFormData = (event) => {
+  event.preventDefault();
+  const formData = new FormData(event.target);
+  const newSleep = {
+    userID: randomUser.id,
+    date: todayDate,
+    hoursSlept: formData.get('hoursSlept'),
+    sleepQuality: formData.get('sleepQuality')
+  }
+  postNewSleep(newSleep);
+  event.target.reset();
 }
