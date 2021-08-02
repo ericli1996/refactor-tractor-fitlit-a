@@ -1,6 +1,6 @@
 import './css/base.scss';
 import './css/styles.scss';
-import { fetchAPIData } from './api-Calls';
+import { fetchAPIData, postNewActivity, postNewHydration } from './api-Calls';
 
 import UserRepository from './UserRepository';
 import User from './User';
@@ -93,7 +93,7 @@ profileButton.addEventListener('click', showDropdown);
 addNewIcons.addEventListener('click', showForm);
 inputBackButton.forEach(button => button.addEventListener('click', returnToNewLog));
 activityForm.addEventListener('submit', getActivityFormData);
-// hydrationForm.addEventListener('submit', getHydrationFormData);
+hydrationForm.addEventListener('submit', getHydrationFormData);
 // sleepForm.addEventListener('submit', getSleepFormData);
 
 // activityBackButton.addEventListener('click', returnToNewLog);
@@ -358,28 +358,18 @@ function getActivityFormData (event) {
     numSteps: formData.get('numSteps'),
     minutesActive: formData.get('minutesActive'),
     flightsOfStairs: formData.get('flightsOfStairs')
-  };
+  }
   postNewActivity(newActivity);
   event.target.reset();
 }
 
-function postNewActivity(activity) {
-  fetch('http://localhost:3001/api/v1/activity', {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(activity)
-  })
-    .then((res) => checkForError(res))
-    .catch((err) => console.log(err))
-    // .then((activity) => )
-}
-
-const checkForError = (response) => {
-  console.log(response);
-  if (!response.ok) {
-    error.forEach(error => error.innerText = "Please make sure that all fields are filled out.");
-    throw new Error("Please make sure that all fields are filled out.");
-  } else {
-    return response.json();
+function getHydrationFormData(event) {
+  event.preventDefault();
+  const formData = new FormData(event.target);
+  const newHydration = {
+    userID: randomUser.id,
+    date: todayDate,
+    numOunces: formData.get('numOunces')
   }
-};
+  postNewHydration(newHydration);
+}
