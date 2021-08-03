@@ -12,14 +12,13 @@ let user, users, randomUser;
 let userRepository = new UserRepository();
 let sleep, sleepData;
 let hydrationData;
-let todayDate = "2020/01/22"; //fix to be dynamic
+let todayDate = "2020/01/22";
 
 let dailyOz = document.querySelectorAll('.daily-oz');
 let dropdownEmail = document.querySelector('#dropdown-email');
 let dropdownFriendsStepsContainer = document.querySelector('#dropdown-friends-steps-container');
 let dropdownGoal = document.querySelector('#dropdown-goal');
 let dropdownName = document.querySelector('#dropdown-name');
-let friendsStepsParagraphs = document.querySelectorAll('.friends-steps');
 let headerName = document.querySelector('#header-name');
 let hydrationCalendarCard = document.querySelector('#hydration-calendar-card');
 let hydrationFriendOuncesToday = document.querySelector('#hydration-friend-ounces-today');
