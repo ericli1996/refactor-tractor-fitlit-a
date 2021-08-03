@@ -10,8 +10,8 @@ const postNewActivity = (activity) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(activity)
   })
-    .then((res) => checkForError(res))
-    .catch((err) => console.log(err))
+    .then((response) => checkForError(response))
+    .catch((error) => console.log(error))
 }
 
 const postNewHydration = (hydro) => {
@@ -20,8 +20,8 @@ const postNewHydration = (hydro) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(hydro)
   })
-    .then((res) => checkForError(res))
-    .catch((err) => console.log(err))
+    .then((response) => checkForError(response))
+    .catch((error) => console.log(error))
 }
 
 const postNewSleep = (sleep) => {
@@ -30,12 +30,11 @@ const postNewSleep = (sleep) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(sleep)
   })
-    .then((res) => checkForError(res))
-    .catch((err) => console.log(err))
+    .then((response) => checkForError(response))
+    .catch((error) => console.log(error))
 }
 
 const checkForError = (response) => {
-  console.log(response)
   if (!response.ok) {
     error.forEach(error => error.innerText = "Please make sure that all fields are filled out.");
     throw new Error("Please make sure that all fields are filled out.");

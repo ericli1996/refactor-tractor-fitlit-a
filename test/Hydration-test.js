@@ -5,7 +5,6 @@ import UserRepository from '../src/UserRepository';
 import User from '../src/User';
 
 describe('Hydration', function() {
-  let hydration;
   let user1;
   let user2;
   let userRepository;
@@ -44,10 +43,10 @@ describe('Hydration', function() {
     userRepository = new UserRepository();
     userRepository.users.push(user1, user2);
     hydrate1 = new Hydration({
-        "userID": 1,
-        "date": "2019/06/15",
-        "numOunces": 37
-      }, userRepository);
+      "userID": 1,
+      "date": "2019/06/15",
+      "numOunces": 37
+    }, userRepository);
     hydrate2 = new Hydration({
       "userID": 2,
       "date": "2019/06/15",
