@@ -4,7 +4,6 @@
 box-sizing: border-box;
 margin: 0;
 padding: 0;
-// border: 1px dotted red;
 }
 
 body {
@@ -23,20 +22,7 @@ button:active {
   outline: none;
 }
 
-#profile-button {
-  background-image: url(../images/profile.png);
-  background-position: center;
-  background-size: 5.6vw;
-  border: none;
-  display: inline;
-  float: right;
-  height: 5.6vw;
-  margin-right: .5vw;
-  margin-top: 1.6vw;
-  width: 5.6vw;
-}
-
-#user-info-dropdown {
+.user-info-dropdown {
   background-color: #1F1F1F;
   color: white;
   margin-left: 60%;
@@ -59,7 +45,7 @@ button:active {
 h1 {
   color: #fff;
   display: inline;
-  font-size: 5.4vw;
+  font-size: 6.5vw;
   letter-spacing: .2em;
 }
 
@@ -74,11 +60,12 @@ h3 {
   font-size: 3vw;
   font-weight: 700;
   letter-spacing: .2em;
+  margin-top: 1%;
 }
 
 .input-card-title {
   margin-bottom: 3%;
-  margin-top: -3%;
+  margin-top: 0;
 }
 
 h4 {
@@ -149,10 +136,6 @@ main {
   grid-area: input;
   margin-top: .5vw;
   width: 100%;
-  // display: flex;
-  // flex-direction: column;
-  // align-items: center;
-  // justify-content: space-evenly;
 }
 
 .input-card {
@@ -170,25 +153,25 @@ form {
   height: 100%;
 }
 
-#steps-card-container {
+.steps-card-container {
   background-color: #F5634B;
   grid-area: steps;
   margin: .5vw;
 }
 
-#hydration-card-container {
+.hydration-card-container {
   background-color: #54C6BE;
   grid-area: hydration;
   margin: .5vw;
 }
 
-#stairs-card-container {
+.stairs-card-container {
   background-color: #8975B2;
   grid-area: stairs;
   margin: .5vw;
 }
 
-#sleep-card-container {
+.sleep-card-container {
   background-color: #FBD089;
   grid-area: sleep;
   margin: .5vw;
@@ -222,6 +205,19 @@ form {
 }
 
 /* BUTTONS */
+.profile-button {
+  background-image: url(../images/profile.png);
+  background-position: center;
+  background-size: 5.6vw;
+  border: none;
+  display: inline;
+  float: right;
+  height: 70%;
+  margin-right: 2%;
+  margin-top: 1.5%;
+  width: 6%;
+}
+
 .info-button {
   background-position: center;
   background-size: 3.4vw;
@@ -335,7 +331,6 @@ form {
   background-image: url(../images/sleep-calendar.png);
 }
 
-
 .steps-trending-button {
   background-image: url(../images/steps-trending.png);
 }
@@ -344,19 +339,47 @@ form {
   background-image: url(../images/stairs-trending.png);
 }
 
+.fa-undo-alt {
+  font-size: 2.8em;
+  margin: 2%;
+}
+
+.fa-shoe-prints,
+.fa-tint,
+.fa-bed {
+  font-size: 3em;
+}
+
+// BUTTON HOVERS
+
+.profile-button:hover,
+.info-button:hover,
+.go-back-button:hover,
+.friends-button:hover,
+.trending-button:hover,
+.calendar-button:hover,
+.fa-undo-alt:hover,
+.add-btn:hover,
+.fas:hover {
+  cursor: pointer;
+}
+
+// INPUT
+input {
+  margin: 1%;
+  padding: 1% 3%;
+  border-radius: 3%;
+}
+
+.add-btn {
+  padding: 2% 12%;
+  border-radius: 4%;
+  background: black;
+  color: white;
+  font-size: .9em;
+}
+
 /* CHANGING CLASSES */
 .hide {
   display: none;
-}
-
-.green-text {
-  color: green;
-}
-
-.red-text {
-  color: red;
-}
-
-.yellow-text {
-  color: #F8BA00;
 }
