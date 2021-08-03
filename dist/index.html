@@ -265,8 +265,8 @@
         <section class="input-card hide" id="addSleepCard">
           <h3>ADD SLEEP LOG</h3>
           <form id="sleepForm">
-            <input type="number" min="0" placeholder="hours" name="hoursSlept" required />
-            <input type="number" min="0" placeholder="quality" name="sleepQuality" required />
+            <input type="number" step="0.1" min="0" placeholder="hours" name="hoursSlept" required />
+            <input type="number" step="0.1" min="0" max="5" placeholder="quality" name="sleepQuality" required />
             <input type="submit" value="Add Sleep!" />
           </form>
           <p class="error"></p>

@@ -104,6 +104,7 @@ activityForm.addEventListener('submit', function() {
 hydrationForm.addEventListener('submit', function() {
   getHydrationFormData(event);
   displayPostData("hydration");
+    // renderDailyUserOz(randomUser);
 });
 sleepForm.addEventListener('submit', function() {
   getSleepFormData(event);
@@ -161,7 +162,6 @@ const renderUserStepsActivity = () => {
   stepsInfoActiveMinutesToday.innerText = randomUser.activityRecord.find(activity => activity.date === todayDate).minutesActive;
   stepsUserStepsToday.innerText = randomUser.activityRecord[0].steps;
   stepsInfoMilesWalkedToday.innerText = randomUser.activityRecord[0].calculateMiles(userRepository);
-  // trendingStepsPhraseContainer.innerHTML = `<p class='trend-line'>${randomUser.trendingStepDays[0]}</p>`;
   stepsCalendarTotalActiveMinutesWeekly.innerText = randomUser.calculateAverageMinutesActiveThisWeek(todayDate)
   stepsCalendarTotalStepsWeekly.innerText = randomUser.calculateAverageStepsThisWeek(todayDate);
 }
@@ -203,18 +203,6 @@ const updateFriendsWeeklySteps = (user, userRepo) => {
     renderDailyUserOz(user, userRepo);
   })
 }
-//
-// friendsStepsParagraphs.forEach(paragraph => {
-//   if (friendsStepsParagraphs[0] === paragraph) {
-//     paragraph.classList.add('green-text');
-//   }
-//   if (friendsStepsParagraphs[friendsStepsParagraphs.length - 1] === paragraph) {
-//     paragraph.classList.add('red-text');
-//   }
-//   if (paragraph.innerText.includes('YOU')) {
-//     paragraph.classList.add('yellow-text');
-//   }
-// })
 
 const sortHydrationDataByDate = (user) => {
   const result = user.ouncesRecord.sort((a, b) => {
@@ -411,52 +399,17 @@ const displayPostData = (dataType) => {
     .then(data => renderUserStepsActivity(randomUser))
     .then(data => renderUserStairActivity(randomUser, userRepository))
     console.log(randomUser);
-    // renderUserStepsActivity(randomUser)
-
   }
   if (dataType === "hydration") {
     fetchAPIData("hydration")
-    .then(data => userRepository.hydrationData = data.hydrationData.map(hydroObj => new Hydration(hydroObj, userRepository)))
+    .then(data => data.hydrationData.map(hydroObj => new Hydration(hydroObj, userRepository)))
     .then(data => renderUserWeeklyOz(randomUser))
     .then(data => renderDailyUserOz(randomUser))
         console.log(randomUser);
   }
   if (dataType === "sleep") {
     fetchAPIData("sleep")
-    .then(data => userRepository.sleepData = data.sleepData.map(sleepObj => new Sleep(sleepObj, userRepository)))
-
+    .then(data => data.sleepData.map(sleepObj => new Sleep(sleepObj, userRepository)))
+    .then(data => renderUserSleepToday(randomUser))
   }
-
 }
-
-// const renderUserStepsActivity = () => {
-//   updateTrendingStepDays(randomUser);
-//   stepsInfoActiveMinutesToday.innerText = randomUser.activityRecord.find(activity => activity.date === todayDate).minutesActive;
-//   stepsUserStepsToday.innerText = randomUser.activityRecord[0].steps;
-//   stepsInfoMilesWalkedToday.innerText = randomUser.activityRecord[0].calculateMiles(userRepository);
-//   trendingStepsPhraseContainer.innerHTML = `<p class='trend-line'>${randomUser.trendingStepDays[0]}</p>`;
-//   stepsCalendarTotalActiveMinutesWeekly.innerText = randomUser.calculateAverageMinutesActiveThisWeek(todayDate)
-//   stepsCalendarTotalStepsWeekly.innerText = randomUser.calculateAverageStepsThisWeek(todayDate);
-// }
-//
-// const renderFriendStepActivity = (userRepo) => {
-//   stepsFriendActiveMinutesAverageToday.innerText = userRepo.calculateAverageMinutesActive(todayDate);
-//   stepsFriendAverageStepGoal.innerText = userRepo.calculateAverageStepGoal();
-//   stepsFriendStepsAverageToday.innerText = userRepo.calculateAverageSteps(todayDate);
-// }
-//
-// const renderUserStairActivity = (user, userRepo) => {
-//   stairsUserStairsToday.innerText = user.activityRecord.find(activity => activity.date === todayDate).flightsOfStairs * 12;
-//   stairsInfoFlightsToday.innerText = user.activityRecord.find(activity => activity.date === todayDate).flightsOfStairs;
-//   stairsCalendarFlightsAverageWeekly.innerText = user.calculateAverageFlightsThisWeek(todayDate);
-//   stairsCalendarStairsAverageWeekly.innerText = (user.calculateAverageFlightsThisWeek(todayDate) * 12).toFixed(0);
-//   stairsFriendFlightsAverageToday.innerText = userRepo.calculateAverageStairs(todayDate);
-//   updateTrendingStairsDays(user);
-//   updateFriendsWeeklySteps(user, userRepo);
-//   renderUserSleepToday(user);
-// }
-//
-// const updateTrendingStairsDays = (user) => {
-//   user.findTrendingStairsDays();
-//   trendingStairsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStairsDays[0]}</p>`;
-// }
