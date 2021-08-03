@@ -10,103 +10,103 @@
   </head>
   <body>
     <header>
-      <h1><span id='header-name'></span>FITLIT</h1>
-      <button type='button' name='button' id='profile-button'></button>
-      <section class='hide' id='user-info-dropdown'>
-        <h5 id='dropdown-name'></h5>
-        <p class='dropdown-p' id='dropdown-email'></p>
-        <p class='dropdown-p' id='dropdown-goal'></p>
+      <h1><span id='headerName'></span>FITLIT</h1>
+      <button class='profile-button' type='button' name='button' id='profileButton'></button>
+      <section class='user-info-dropdown hide' id='userInfoDropdown'>
+        <h5 id='dropdownName'></h5>
+        <p class='dropdown-p' id='dropdownEmail'></p>
+        <p class='dropdown-p' id='dropdownGoal'></p>
         <br />
-        <p class='dropdown-p' id='dropdown-friends'>FRIENDS TOTAL STEPS THIS WEEK</p>
-        <div id='dropdown-friends-steps-container'></div>
+        <p class='dropdown-p' id='dropdownFriends'>FRIENDS TOTAL STEPS THIS WEEK</p>
+        <div id='dropdownFriendsStepsContainer'></div>
       </section>
     </header>
     <main>
-      <section class='card-container' id='steps-card-container'>
-        <section class='main-card' id='steps-main-card'>
+      <section class='card-container steps-card-container' id='stepsCardContainer'>
+        <section class='main-card' id='stepsMainCard'>
           <div class='main-card-top-row'>
             <button type='button' name='button' class='info-button steps-info-button'></button>
             <h3>YOU HAVE WALKED</h3>
             <button type='button' name='button' class='friends-button steps-friends-button'></button>
           </div>
-          <h2 id='steps-user-steps-today'>X</h2>
+          <h2 id='stepsUserStepsToday'>X</h2>
           <div class='main-card-top-row'>
-            <button type='button' name='button' class='trending-button steps-trending-button'></button>
+            <button type='button' name='button' class='trending-button steps-trending-button' id="stepsTrendingButton"></button>
             <h3>STEPS TODAY</h3>
             <button type='button' name='button' class='calendar-button steps-calendar-button'></button>
           </div>
         </section>
-        <section class='info-card hide' id='steps-info-card'>
+        <section class='info-card hide' id='stepsInfoCard'>
           <button type='button' name='button' class='go-back-button steps-go-back-button'></button>
           <div class='card-data-line'>
             <p>TOTAL ACTIVE MINUTES TODAY:</p>
-            <h4 id='steps-info-active-minutes-today'></h4>
+            <h4 id='stepsInfoActiveMinutesToday'></h4>
           </div>
           <div class='card-data-line'>
             <p>TOTAL MILES WALKED TODAY:</p>
-            <h4 id='steps-info-miles-walked-today'></h4>
+            <h4 id='stepsInfoMilesWalkedToday'></h4>
           </div>
         </section>
-        <section class='friends-card hide' id='steps-friends-card'>
+        <section class='friends-card hide' id='stepsFriendsCard'>
           <button type='button' name='button' class='go-back-button steps-go-back-button'></button>
           <div class='card-data-line'>
             <p>ALL USERS' AVERAGE ACTIVE MINUTES TODAY:</p>
-            <h4 id='steps-friend-active-minutes-average-today'></h4>
+            <h4 id='stepsFriendActiveMinutesAverageToday'></h4>
           </div>
           <div class='card-data-line'>
             <p>ALL USERS' AVERAGE STEPS TODAY:</p>
-            <h4 id='steps-friend-steps-average-today'></h4>
+            <h4 id='stepsFriendStepsAverageToday'></h4>
           </div>
           <div class='card-data-line'>
             <p>ALL USERS' AVERAGE STEP GOAL:</p>
-            <h4 id='steps-friend-average-step-goal'></h4>
+            <h4 id='stepsFriendAverageStepGoal'></h4>
           </div>
         </section>
-        <section class='trending-card hide' id='steps-trending-card'>
+        <section class='trending-card hide' id='stepsTrendingCard'>
           <button type='button' name='button' class='go-back-button steps-go-back-button'></button>
-          <div class='card-data-line trending-steps-phrase-container'>
+          <div class='card-data-line trending-steps-phrase-container' id="trendingStepsPhraseContainer">
           </div>
         </section>
-        <section class='calendar-card hide' id='steps-calendar-card'>
+        <section class='calendar-card hide' id='stepsCalendarCard'>
           <button type='button' name='button' class='go-back-button steps-go-back-button'></button>
           <div class='card-data-line'>
             <p>YOUR WEEKLY AVERAGE MINUTES:</p>
-            <h4 id='steps-calendar-total-active-minutes-weekly'></h4>
+            <h4 id='stepsCalendarTotalActiveMinutesWeekly'></h4>
           </div>
           <div class='card-data-line'>
             <p>YOUR TOTAL WEEKLY STEP COUNT:</p>
-            <h4 id='steps-calendar-total-steps-weekly'></h4>
+            <h4 id='stepsCalendarTotalStepsWeekly'></h4>
           </div>
         </section>
       </section>
-      <section class='card-container' id='hydration-card-container'>
-        <section class='main-card' id='hydration-main-card'>
+      <section class='card-container hydration-card-container' id='hydration-card-container'>
+        <section class='main-card' id='hydrationMainCard'>
           <div class='main-card-top-row'>
             <button type='button' name='button' class='info-button hydration-info-button'></button>
             <h3>YOU HAVE HAD</h3>
             <button type='button' name='button' class='friends-button hydration-friends-button'></button>
           </div>
-          <h2 id='hydration-user-ounces-today'></h2>
+          <h2 id='hydrationUserOuncesToday'></h2>
           <div class='main-card-bottom-row'>
             <h3>OZ OF WATER TODAY</h3>
             <button type='button' name='button' class='calendar-button hydration-calendar-button'></button>
           </div>
         </section>
-        <section class='info-card hide' id='hydration-info-card'>
+        <section class='info-card hide' id='hydrationInfoCard'>
           <button type='button' name='button' class='go-back-button hydration-go-back-button'></button>
           <div class='card-data-line'>
             <p>GLASSES OF WATER CONSUMED TODAY:</p>
-            <h4 id='hydration-info-glasses-today'></h4>
+            <h4 id='hydrationInfoGlassesToday'></h4>
           </div>
         </section>
-        <section class='friends-card hide' id='hydration-friends-card'>
+        <section class='friends-card hide' id='hydrationFriendsCard'>
           <button type='button' name='button' class='go-back-button hydration-go-back-button'></button>
           <div class='card-data-line'>
             <p>ALL USERS' AVERAGE DAILY OUNCES:</p>
-            <h4 id='hydration-friend-ounces-today'></h4>
+            <h4 id='hydrationFriendOuncesToday'></h4>
           </div>
         </section>
-        <section class='calendar-card hide' id='hydration-calendar-card'>
+        <section class='calendar-card hide' id='hydrationCalendarCard'>
           <button type='button' name='button' class='go-back-button hydration-go-back-button'></button>
           <div class='hydration-data-line'>
             <p class='hydration-weekly-label'>YESTERDAY:</p>
@@ -134,99 +134,99 @@
           </div>
         </section>
       </section>
-      <section class='card-container' id='stairs-card-container'>
-        <section class='main-card' id='stairs-main-card'>
+      <section class='card-container stairs-card-container' id='stairs-card-container'>
+        <section class='main-card' id='stairsMainCard'>
           <div class='main-card-top-row'>
             <button type='button' name='button' class='info-button stairs-info-button'></button>
             <h3>YOU HAVE CLIMBED</h3>
             <button type='button' name='button' class='friends-button stairs-friends-button'></button>
           </div>
-          <h2 id='stairs-user-stairs-today'></h2>
+          <h2 id='stairsUserStairsToday'></h2>
           <div class='main-card-top-row'>
-            <button type='button' name='button' class='trending-button stairs-trending-button'></button>
+            <button type='button' name='button' class='trending-button stairs-trending-button' id="stairsTrendingButton"></button>
             <h3>STAIRS TODAY</h3>
             <button type='button' name='button' class='calendar-button stairs-calendar-button'></button>
           </div>
         </section>
-        <section class='info-card hide' id='stairs-info-card'>
+        <section class='info-card hide' id='stairsInfoCard'>
           <button type='button' name='button' class='go-back-button stairs-go-back-button'></button>
           <div class='card-data-line'>
             <p>FLIGHTS CLIMBED TODAY</p>
-            <h4 id='stairs-info-flights-today'></h4>
+            <h4 id='stairsInfoFlightsToday'></h4>
           </div>
         </section>
-        <section class='friends-card hide' id='stairs-friends-card'>
+        <section class='friends-card hide' id='stairsFriendsCard'>
           <button type='button' name='button' class='go-back-button stairs-go-back-button'></button>
           <div class='card-data-line'>
             <p>ALL USERS' AVERAGE FLIGHTS TODAY</p>
-            <h4 id='stairs-friend-flights-average-today'></h4>
+            <h4 id='stairsFriendFlightsAverageToday'></h4>
           </div>
         </section>
-        <section class='trending-card hide' id='stairs-trending-card'>
+        <section class='trending-card hide' id="stairsTrendingCard">
           <button type='button' name='button' class='go-back-button stairs-go-back-button'></button>
-          <div class='card-data-line trending-stairs-phrase-container'>
+          <div class='card-data-line trending-stairs-phrase-container' id="trendingStairsPhraseContainer">
           </div>
         </section>
-        <section class='calendar-card hide' id='stairs-calendar-card'>
+        <section class='calendar-card hide' id='stairsCalendarCard'>
           <button type='button' name='button' class='go-back-button stairs-go-back-button'></button>
           <div class='card-data-line'>
             <p>YOUR WEEKLY FLIGHTS CLIMBED</p>
-            <h4 id='stairs-calendar-flights-average-weekly'></h4>
+            <h4 id='stairsCalendarFlightsAverageWeekly'></h4>
           </div>
           <div class='card-data-line'>
             <p>YOUR WEEKLY STAIRS CLIMBED</p>
-            <h4 id='stairs-calendar-stairs-average-weekly'></h4>
+            <h4 id='stairsCalendarStairsAverageWeekly'></h4>
           </div>
         </section>
       </section>
-      <section class='card-container' id='sleep-card-container'>
-        <section class='main-card' id='sleep-main-card'>
+      <section class='card-container sleep-card-container' id='sleep-card-container'>
+        <section class='main-card' id='sleepMainCard'>
           <div class='main-card-top-row'>
             <button type='button' name='button' class='info-button sleep-info-button'></button>
             <h3>YOU SLEPT</h3>
             <button type='button' name='button' class='friends-button sleep-friends-button'></button>
           </div>
-          <h2 id='sleep-user-hours-today'></h2>
+          <h2 id='sleepUserHoursToday'></h2>
           <div class='main-card-bottom-row'>
             <h3>HOURS LAST NIGHT</h3>
             <button type='button' name='button' class='calendar-button sleep-calendar-button'></button>
           </div>
         </section>
-        <section class='info-card hide' id='sleep-info-card'>
+        <section class='info-card hide' id='sleepInfoCard'>
           <button type='button' name='button' class='go-back-button sleep-go-back-button'></button>
           <div class='card-data-line'>
             <p>SLEEP QUALITY LAST NIGHT</p>
-            <h4 id='sleep-info-quality-today'></h4>
+            <h4 id='sleepInfoQualityToday'></h4>
           </div>
           <div class='card-data-line'>
             <p>OVERALL NUMBER OF HOURS AVERAGE</p>
-            <h4 id='sleep-info-hours-average-alltime'></h4>
+            <h4 id='sleepInfoHoursAverageAlltime'></h4>
           </div>
           <div class='card-data-line'>
             <p>OVERALL SLEEP QUALITY AVERAGE</p>
-            <h4 id='sleep-info-quality-average-alltime'></h4>
+            <h4 id='sleepInfoQualityAverageAlltime'></h4>
           </div>
         </section>
-        <section class='friends-card hide' id='sleep-friends-card'>
+        <section class='friends-card hide' id='sleepFriendsCard'>
           <button type='button' name='button' class='go-back-button sleep-go-back-button'></button>
           <div class='card-data-line'>
             <p>LAST NIGHT'S SUPERIOR SLEEPER</p>
-            <h4 id='sleep-friend-longest-sleeper'></h4>
+            <h4 id='sleepFriendLongestSleeper'></h4>
           </div>
           <div class='card-data-line'>
             <p>LAST NIGHT'S INFERIOR SLEEPER</p>
-            <h4 id='sleep-friend-worst-sleeper'></h4>
+            <h4 id='sleepFriendWorstSleeper'></h4>
           </div>
         </section>
-        <section class='calendar-card hide' id='sleep-calendar-card'>
+        <section class='calendar-card hide' id='sleepCalendarCard'>
           <button type='button' name='button' class='go-back-button sleep-go-back-button'></button>
           <div class='card-data-line'>
             <p>LAST WEEK'S HOURLY AVERAGE</p>
-            <h4 id='sleep-calendar-hours-average-weekly'></h4>
+            <h4 id='sleepCalendarHoursAverageWeekly'></h4>
           </div>
           <div class='card-data-line'>
             <p>LAST WEEK'S QUALITY AVERAGE</p>
-            <h4 id='sleep-calendar-quality-average-weekly'></h4>
+            <h4 id='sleepCalendarQualityAverageWeekly'></h4>
           </div>
         </section>
       </section>
@@ -241,31 +241,31 @@
           </div>
         </section>
         <section class='input-card hide' id='addActivityCard'>
-          <h3>ADD ACTIVITY LOG</h3>
-          <form id="activityForm">
-            <input type="number" min="0" placeholder="steps" name="numSteps" required />
-            <input type="number" min="0" placeholder="minutes" name="minutesActive" required />
-            <input type="number" min="0" placeholder="flights" name="flightsOfStairs" required />
-            <input type="submit" value="Add Activity!" />
+          <h3>ADD ACTIVITY INFO</h3>
+          <form>
+            <input type="number" min="0" placeholder="Number of Steps" name="numSteps" required />
+            <input type="number" min="0" placeholder="Active Minutes" name="minutesActive" required />
+            <input type="number" min="0" placeholder="Flights of Stairs" name="flightsOfStairs" required />
+            <input class="add-btn" type="submit" value="Add Activity!" />
           </form>
           <p class="error"></p>
-          <i class="fas fa-undo-alt" id="activityBackButton"></i>
+          <i class="fas fa-undo-alt"></i>
         </section>
-        <section class='input-card hide' id="addHydrationCard">
-          <h3>ADD HYDRATION LOG</h3>
-          <form id="hydrationForm">
-            <input type="number" min="0" placeholder="Ounces" name="numOunces" required />
-            <input type="submit" value="Add Hydration!" />
+        <section class='input-card hide' id='addHydrationCard'>
+          <h3>ADD HYDRATION INFO</h3>
+          <form>
+            <input type="number" min="0" placeholder="Ounces Drank" name="numOunces" required />
+            <input class="add-btn" type="submit" value="Add Hydration!" />
           </form>
           <p class="error"></p>
           <i class="fas fa-undo-alt" id="hydrationBackButton"></i>
         </section>
         <section class="input-card hide" id="addSleepCard">
-          <h3>ADD SLEEP LOG</h3>
+          <h3>ADD SLEEP INFO</h3>
           <form id="sleepForm">
-            <input type="number" step="0.1" min="0" placeholder="hours" name="hoursSlept" required />
-            <input type="number" step="0.1" min="0" max="5" placeholder="quality" name="sleepQuality" required />
-            <input type="submit" value="Add Sleep!" />
+            <input type="number" step="0.1" min="0" placeholder="Hours Slept" name="hoursSlept" required />
+            <input type="number" step="0.1" min="0" max="5" placeholder="Sleep Quality" name="sleepQuality" required />
+            <input class="add-btn" type="submit" value="Add Sleep!" />
           </form>
           <p class="error"></p>
           <i class="fas fa-undo-alt" id="sleepBackButton"></i>
