@@ -242,36 +242,39 @@
           </div>
         </section>
         <section class='input-card hide' id='addActivityCard'>
-          <h3>placeholder activity</h3>
-          <form>
+          <h3>ADD ACTIVITY LOG</h3>
+          <form id="activityForm">
             <input type="number" min="0" placeholder="steps" name="numSteps" required />
             <input type="number" min="0" placeholder="minutes" name="minutesActive" required />
             <input type="number" min="0" placeholder="flights" name="flightsOfStairs" required />
             <input type="submit" value="Add Activity!" />
           </form>
+          <p class="error"></p>
           <!-- <button type='button' name='button' class='input-go-back-button'></button> -->
-          <i class="fas fa-undo-alt"></i>
+          <i class="fas fa-undo-alt" id="activityBackButton"></i>
         </section>
-        <section class='input-card hide' id='addHydrationCard'>
-          <h3>placeholder hydration</h3>
-          <form>
+        <section class='input-card hide' id="addHydrationCard">
+          <h3>ADD HYDRATION LOG</h3>
+          <form id="hydrationForm">
             <input type="number" min="0" placeholder="Ounces" name="numOunces" required />
             <input type="submit" value="Add Hydration!" />
           </form>
-          <i class="fas fa-undo-alt"></i>
+          <p class="error"></p>
+          <i class="fas fa-undo-alt" id="hydrationBackButton"></i>
         </section>
-        <section class='input-card hide' id='addSleepCard'>
-          <h3>placeholder sleep</h3>
-          <form>
-            <input type="number" min="0" placeholder="hours" name="hoursSlept" required />
-            <input type="number" min="0" placeholder="quality" name="sleepQuality" required />
+        <section class="input-card hide" id="addSleepCard">
+          <h3>ADD SLEEP LOG</h3>
+          <form id="sleepForm">
+            <input type="number" step="0.1" min="0" placeholder="hours" name="hoursSlept" required />
+            <input type="number" step="0.1" min="0" max="5" placeholder="quality" name="sleepQuality" required />
             <input type="submit" value="Add Sleep!" />
           </form>
-          <i class="fas fa-undo-alt"></i>
+          <p class="error"></p>
+          <i class="fas fa-undo-alt" id="sleepBackButton"></i>
         </section>
       </section>
 
-    </main>  
+    </main>
     <script src="bundle.js"></script>
   </body>
 </html>
