@@ -76,7 +76,6 @@ let addActivityCard = document.getElementById('addActivityCard');
 let addHydrationCard = document.getElementById('addHydrationCard');
 let addSleepCard = document.getElementById('addSleepCard');
 let inputBackButton = document.querySelectorAll('.fa-undo-alt');
-let inputCard = document.querySelector('.input-card');
 let activityBackButton = document.getElementById('activityBackButton');
 let hydrationBackButton = document.getElementById('hydrationBackButton');
 let sleepBackButton = document.getElementById('sleepBackButton');
@@ -88,37 +87,40 @@ let error = document.querySelectorAll('.error');
 window.addEventListener('load', function() {
   start();
 });
+
 mainPage.addEventListener('click', function() {
   showInfo(event);
 });
+
 profileButton.addEventListener('click', function() {
   showDropdown();
 });
+
 addNewIcons.addEventListener('click', function() {
   showForm(event);
 });
+
 activityForm.addEventListener('submit', function() {
   getActivityFormData(event);
   displayPostData("activity");
 });
+
 hydrationForm.addEventListener('submit', function() {
   getHydrationFormData(event);
   displayPostData("hydration");
-    // renderDailyUserOz(randomUser);
 });
+
 sleepForm.addEventListener('submit', function() {
   getSleepFormData(event);
   displayPostData("sleep");
 });
+
 inputBackButton.forEach(button => button.addEventListener('click', function() {
   returnToNewLog(event);
 }));
 
 const start = () => {
   setUpUserRepo();
-  // setUpSleepData();
-  // generateHydration();
-  // generateActivity();
 }
 
 const setUpUserRepo = () => {
@@ -197,8 +199,7 @@ const updateFriendsWeeklySteps = (user, userRepo) => {
   user.findFriendsTotalStepsForWeek(userRepo.users, todayDate)
   user.friendsActivityRecords.forEach(friend => {
     dropdownFriendsStepsContainer.innerHTML += `
-    <p class='dropdown-p friends-steps'>${friend.firstName} |  ${friend.totalWeeklySteps}</p>
-    `;
+    <p class='dropdown-p friends-steps'>${friend.firstName} |  ${friend.totalWeeklySteps}</p>`;
     renderUserWeeklyOz(user);
     renderDailyUserOz(user, userRepo);
   })
@@ -362,9 +363,7 @@ const getActivityFormData = (event) => {
     flightsOfStairs: JSON.parse(formData.get('flightsOfStairs'))
   }
   postNewActivity(newActivity);
-
   event.target.reset();
-
 }
 
 const getHydrationFormData = (event) => {
@@ -398,14 +397,12 @@ const displayPostData = (dataType) => {
     .then(data => data.activityData.map(activityObj => new Activity(activityObj, userRepository)))
     .then(data => renderUserStepsActivity(randomUser))
     .then(data => renderUserStairActivity(randomUser, userRepository))
-    console.log(randomUser);
   }
   if (dataType === "hydration") {
     fetchAPIData("hydration")
     .then(data => data.hydrationData.map(hydroObj => new Hydration(hydroObj, userRepository)))
     .then(data => renderUserWeeklyOz(randomUser))
     .then(data => renderDailyUserOz(randomUser))
-        console.log(randomUser);
   }
   if (dataType === "sleep") {
     fetchAPIData("sleep")

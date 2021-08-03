@@ -230,7 +230,6 @@
           </div>
         </section>
       </section>
-
       <section class='card-container input-card-container' id='input-card-container'>
         <section class='main-card' id='inputMainCard'>
           <h3 class='input-card-title'>ADD A NEW LOG</h3>
@@ -242,18 +241,18 @@
         </section>
         <section class='input-card hide' id='addActivityCard'>
           <h3>ADD ACTIVITY INFO</h3>
-          <form>
+          <form id="activityForm">
             <input type="number" min="0" placeholder="Number of Steps" name="numSteps" required />
             <input type="number" min="0" placeholder="Active Minutes" name="minutesActive" required />
             <input type="number" min="0" placeholder="Flights of Stairs" name="flightsOfStairs" required />
             <input class="add-btn" type="submit" value="Add Activity!" />
           </form>
           <p class="error"></p>
-          <i class="fas fa-undo-alt"></i>
+          <i class="fas fa-undo-alt" id="activityBackButton"></i>
         </section>
         <section class='input-card hide' id='addHydrationCard'>
           <h3>ADD HYDRATION INFO</h3>
-          <form>
+          <form id="hydrationForm">
             <input type="number" min="0" placeholder="Ounces Drank" name="numOunces" required />
             <input class="add-btn" type="submit" value="Add Hydration!" />
           </form>
@@ -271,7 +270,6 @@
           <i class="fas fa-undo-alt" id="sleepBackButton"></i>
         </section>
       </section>
-
     </main>
     <script src="bundle.js"></script>
   </body>
