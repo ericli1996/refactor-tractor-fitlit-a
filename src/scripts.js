@@ -12,71 +12,70 @@ let user, users, randomUser;
 let userRepository = new UserRepository();
 let sleep, sleepData;
 let hydrationData;
-let todayDate = "2020/01/22"; //fix to be dynamic
+let todayDate = "2020/01/22";
 
 let dailyOz = document.querySelectorAll('.daily-oz');
-let dropdownEmail = document.querySelector('#dropdown-email');
-let dropdownFriendsStepsContainer = document.querySelector('#dropdown-friends-steps-container');
-let dropdownGoal = document.querySelector('#dropdown-goal');
-let dropdownName = document.querySelector('#dropdown-name');
+let dropdownEmail = document.getElementById('dropdownEmail');
+let dropdownFriendsStepsContainer = document.getElementById('dropdownFriendsStepsContainer');
+let dropdownGoal = document.getElementById('dropdownGoal');
+let dropdownName = document.getElementById('dropdownName');
 let friendsStepsParagraphs = document.querySelectorAll('.friends-steps');
-let headerName = document.querySelector('#header-name');
-let hydrationCalendarCard = document.querySelector('#hydration-calendar-card');
-let hydrationFriendOuncesToday = document.querySelector('#hydration-friend-ounces-today');
-let hydrationFriendsCard = document.querySelector('#hydration-friends-card');
-let hydrationInfoCard = document.querySelector('#hydration-info-card');
-let hydrationInfoGlassesToday = document.querySelector('#hydration-info-glasses-today');
-let hydrationMainCard = document.querySelector('#hydration-main-card');
-let hydrationUserOuncesToday = document.querySelector('#hydration-user-ounces-today');
+let headerName = document.getElementById('headerName');
+let hydrationCalendarCard = document.getElementById('hydrationCalendarCard');
+let hydrationFriendOuncesToday = document.getElementById('hydrationFriendOuncesToday');
+let hydrationFriendsCard = document.getElementById('hydrationFriendsCard');
+let hydrationInfoCard = document.getElementById('hydrationInfoCard');
+let hydrationInfoGlassesToday = document.getElementById('hydrationInfoGlassesToday');
+let hydrationMainCard = document.getElementById('hydrationMainCard');
+let hydrationUserOuncesToday = document.getElementById('hydrationUserOuncesToday');
 let mainPage = document.querySelector('main');
-let profileButton = document.querySelector('#profile-button');
-let sleepCalendarCard = document.querySelector('#sleep-calendar-card');
-let sleepCalendarHoursAverageWeekly = document.querySelector('#sleep-calendar-hours-average-weekly');
-let sleepCalendarQualityAverageWeekly = document.querySelector('#sleep-calendar-quality-average-weekly');
-let sleepFriendLongestSleeper = document.querySelector('#sleep-friend-longest-sleeper');
-let sleepFriendsCard = document.querySelector('#sleep-friends-card');
-let sleepFriendWorstSleeper = document.querySelector('#sleep-friend-worst-sleeper');
-let sleepInfoCard = document.querySelector('#sleep-info-card');
-let sleepInfoHoursAverageAlltime = document.querySelector('#sleep-info-hours-average-alltime');
-let sleepInfoQualityAverageAlltime = document.querySelector('#sleep-info-quality-average-alltime');
-let sleepInfoQualityToday = document.querySelector('#sleep-info-quality-today');
-let sleepMainCard = document.querySelector('#sleep-main-card');
-let sleepUserHoursToday = document.querySelector('#sleep-user-hours-today');
-let stairsCalendarCard = document.querySelector('#stairs-calendar-card');
-let stairsCalendarFlightsAverageWeekly = document.querySelector('#stairs-calendar-flights-average-weekly');
-let stairsCalendarStairsAverageWeekly = document.querySelector('#stairs-calendar-stairs-average-weekly');
-let stepsMainCard = document.querySelector('#steps-main-card');
-let stepsInfoCard = document.querySelector('#steps-info-card');
-let stepsFriendsCard = document.querySelector('#steps-friends-card');
-let stepsTrendingCard = document.querySelector('#steps-trending-card');
-let stepsCalendarCard = document.querySelector('#steps-calendar-card');
-let stairsFriendFlightsAverageToday = document.querySelector('#stairs-friend-flights-average-today');
-let stairsFriendsCard = document.querySelector('#stairs-friends-card');
-let stairsInfoCard = document.querySelector('#stairs-info-card');
-let stairsInfoFlightsToday = document.querySelector('#stairs-info-flights-today');
-let stairsMainCard = document.querySelector('#stairs-main-card');
-let stairsTrendingButton = document.querySelector('.stairs-trending-button');
-let stairsTrendingCard = document.querySelector('#stairs-trending-card');
-let stairsUserStairsToday = document.querySelector('#stairs-user-stairs-today');
-let stepsCalendarTotalActiveMinutesWeekly = document.querySelector('#steps-calendar-total-active-minutes-weekly');
-let stepsCalendarTotalStepsWeekly = document.querySelector('#steps-calendar-total-steps-weekly');
-let stepsFriendAverageStepGoal = document.querySelector('#steps-friend-average-step-goal');
-let stepsInfoActiveMinutesToday = document.querySelector('#steps-info-active-minutes-today');
-let stepsInfoMilesWalkedToday = document.querySelector('#steps-info-miles-walked-today');
-let stepsFriendActiveMinutesAverageToday = document.querySelector('#steps-friend-active-minutes-average-today');
-let stepsFriendStepsAverageToday = document.querySelector('#steps-friend-steps-average-today');
-let stepsTrendingButton = document.querySelector('.steps-trending-button');
-let stepsUserStepsToday = document.querySelector('#steps-user-steps-today');
-let trendingStepsPhraseContainer = document.querySelector('.trending-steps-phrase-container');
-let trendingStairsPhraseContainer = document.querySelector('.trending-stairs-phrase-container');
-let userInfoDropdown = document.querySelector('#user-info-dropdown');
+let profileButton = document.getElementById('profileButton');
+let sleepCalendarCard = document.getElementById('sleepCalendarCard');
+let sleepCalendarHoursAverageWeekly = document.getElementById('sleepCalendarHoursAverageWeekly');
+let sleepCalendarQualityAverageWeekly = document.getElementById('sleepCalendarQualityAverageWeekly');
+let sleepFriendLongestSleeper = document.getElementById('sleepFriendLongestSleeper');
+let sleepFriendsCard = document.getElementById('sleepFriendsCard');
+let sleepFriendWorstSleeper = document.getElementById('sleepFriendWorstSleeper');
+let sleepInfoCard = document.getElementById('sleepInfoCard');
+let sleepInfoHoursAverageAlltime = document.getElementById('sleepInfoHoursAverageAlltime');
+let sleepInfoQualityAverageAlltime = document.getElementById('sleepInfoQualityAverageAlltime');
+let sleepInfoQualityToday = document.getElementById('sleepInfoQualityToday');
+let sleepMainCard = document.getElementById('sleepMainCard');
+let sleepUserHoursToday = document.getElementById('sleepUserHoursToday');
+let stairsCalendarCard = document.getElementById('stairsCalendarCard');
+let stairsCalendarFlightsAverageWeekly = document.getElementById('stairsCalendarFlightsAverageWeekly');
+let stairsCalendarStairsAverageWeekly = document.getElementById('stairsCalendarStairsAverageWeekly');
+let stepsMainCard = document.getElementById('stepsMainCard');
+let stepsInfoCard = document.getElementById('stepsInfoCard');
+let stepsFriendsCard = document.getElementById('stepsFriendsCard');
+let stepsTrendingCard = document.getElementById('stepsTrendingCard');
+let stepsCalendarCard = document.getElementById('stepsCalendarCard');
+let stairsFriendFlightsAverageToday = document.getElementById('stairsFriendFlightsAverageToday');
+let stairsFriendsCard = document.getElementById('stairsFriendsCard');
+let stairsInfoCard = document.getElementById('stairsInfoCard');
+let stairsInfoFlightsToday = document.getElementById('stairsInfoFlightsToday');
+let stairsMainCard = document.getElementById('stairsMainCard');
+let stairsTrendingButton = document.getElementById('stairsTrendingButton');
+let stairsTrendingCard = document.getElementById('stairsTrendingCard');
+let stairsUserStairsToday = document.getElementById('stairsUserStairsToday');
+let stepsCalendarTotalActiveMinutesWeekly = document.getElementById('stepsCalendarTotalActiveMinutesWeekly');
+let stepsCalendarTotalStepsWeekly = document.getElementById('stepsCalendarTotalStepsWeekly');
+let stepsFriendAverageStepGoal = document.getElementById('stepsFriendAverageStepGoal');
+let stepsInfoActiveMinutesToday = document.getElementById('stepsInfoActiveMinutesToday');
+let stepsInfoMilesWalkedToday = document.getElementById('stepsInfoMilesWalkedToday');
+let stepsFriendActiveMinutesAverageToday = document.getElementById('stepsFriendActiveMinutesAverageToday');
+let stepsFriendStepsAverageToday = document.getElementById('stepsFriendStepsAverageToday');
+let stepsTrendingButton = document.getElementById('stepsTrendingButton');
+let stepsUserStepsToday = document.getElementById('stepsUserStepsToday');
+let trendingStepsPhraseContainer = document.getElementById('trendingStepsPhraseContainer');
+let trendingStairsPhraseContainer = document.getElementById('trendingStairsPhraseContainer');
+let userInfoDropdown = document.getElementById('userInfoDropdown');
 let addNewIcons = document.getElementById('inputCardTopRow');
 let inputMainCard = document.getElementById('inputMainCard');
 let addActivityCard = document.getElementById('addActivityCard');
 let addHydrationCard = document.getElementById('addHydrationCard');
 let addSleepCard = document.getElementById('addSleepCard');
 let inputBackButton = document.querySelectorAll('.fa-undo-alt');
-let inputCard = document.querySelector('.input-card');
 let activityBackButton = document.getElementById('activityBackButton');
 let hydrationBackButton = document.getElementById('hydrationBackButton');
 let sleepBackButton = document.getElementById('sleepBackButton');
@@ -88,37 +87,40 @@ let error = document.querySelectorAll('.error');
 window.addEventListener('load', function() {
   start();
 });
+
 mainPage.addEventListener('click', function() {
   showInfo(event);
 });
+
 profileButton.addEventListener('click', function() {
   showDropdown();
 });
+
 addNewIcons.addEventListener('click', function() {
   showForm(event);
 });
+
 activityForm.addEventListener('submit', function() {
   getActivityFormData(event);
   displayPostData("activity");
 });
+
 hydrationForm.addEventListener('submit', function() {
   getHydrationFormData(event);
   displayPostData("hydration");
-    // renderDailyUserOz(randomUser);
 });
+
 sleepForm.addEventListener('submit', function() {
   getSleepFormData(event);
   displayPostData("sleep");
 });
+
 inputBackButton.forEach(button => button.addEventListener('click', function() {
   returnToNewLog(event);
 }));
 
 const start = () => {
   setUpUserRepo();
-  // setUpSleepData();
-  // generateHydration();
-  // generateActivity();
 }
 
 const setUpUserRepo = () => {
@@ -197,8 +199,7 @@ const updateFriendsWeeklySteps = (user, userRepo) => {
   user.findFriendsTotalStepsForWeek(userRepo.users, todayDate)
   user.friendsActivityRecords.forEach(friend => {
     dropdownFriendsStepsContainer.innerHTML += `
-    <p class='dropdown-p friends-steps'>${friend.firstName} |  ${friend.totalWeeklySteps}</p>
-    `;
+    <p class='dropdown-p friends-steps'>${friend.firstName} |  ${friend.totalWeeklySteps}</p>`;
     renderUserWeeklyOz(user);
     renderDailyUserOz(user, userRepo);
   })
@@ -362,9 +363,7 @@ const getActivityFormData = (event) => {
     flightsOfStairs: JSON.parse(formData.get('flightsOfStairs'))
   }
   postNewActivity(newActivity);
-
   event.target.reset();
-
 }
 
 const getHydrationFormData = (event) => {
@@ -398,14 +397,12 @@ const displayPostData = (dataType) => {
     .then(data => data.activityData.map(activityObj => new Activity(activityObj, userRepository)))
     .then(data => renderUserStepsActivity(randomUser))
     .then(data => renderUserStairActivity(randomUser, userRepository))
-    console.log(randomUser);
   }
   if (dataType === "hydration") {
     fetchAPIData("hydration")
     .then(data => data.hydrationData.map(hydroObj => new Hydration(hydroObj, userRepository)))
     .then(data => renderUserWeeklyOz(randomUser))
     .then(data => renderDailyUserOz(randomUser))
-        console.log(randomUser);
   }
   if (dataType === "sleep") {
     fetchAPIData("sleep")
